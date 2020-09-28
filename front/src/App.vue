@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <TopHeader />
-    <router-view/>
+    <TopHeader v-if="$route.name != 'MeetingRoom'" />
+    <router-view @submit-login-data="pushLoginData(loginData)"/>
   </div>
 </template>
 <script>
@@ -12,9 +12,20 @@ import TopHeader from '@/components/TopHeader.vue';
 
 export default {
   name: "app",
+  // data() {
+  //   return {
+  //     sendloginData: null,
+  //   }
+  // },
   components: {
     TopHeader
   },
+  // methods: {
+  //   pushLoginData(loginData) {
+  //     this.sendloginData = loginData
+  //     console.log('App', sendloginData)
+  //   }
+  // }
 
 }
 </script>

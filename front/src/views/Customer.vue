@@ -1,18 +1,21 @@
 <template>
   <div class="customer">
-      <div class="voda-logo">
-        <img alt="voda logo" src="../assets/logo_transparent.png" width="300" height="300">
-      </div>
       <div class="customer-input">
-        <div>
-            별명: <input type="text">
+        <div class="voda-logo">
+          <!-- <img alt="voda logo" src="../assets/logo_transparent.png" width="300" height="300"> -->
+          <h1>VODA</h1>
         </div>
-        <div>
-            이메일: <input type="text">
+        <div class="customer-div">
+          <label for="nickname">NICKNAME</label>
+          <input type="text" id="nickname">
         </div>
-      </div>
-      <div class="enter-button">
-          <a href="/meeting/start"><button>다음</button></a>
+        <div class="customer-div">
+          <label for="email">EMAIL</label> 
+          <input type="text" id="email">
+        </div>
+        <div class="customer-button">
+            <a href="/voda/meeting/start"><button>다음</button></a>
+        </div>
       </div>
   </div>
 </template>
@@ -24,5 +27,83 @@ export default {
 </script>
 
 <style>
+.customer {
+  background-image: linear-gradient(to left bottom, #f2aaf6, #ebb1fa, #e4b7fd, #ddbdfe, #d8c2ff, #d9c4ff, #dbc6ff, #dcc8ff, #e4c8ff, #ecc8ff, #f4c8ff, #fcc8ff);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  font-family: 'Viga', sans-serif;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+}
+.customer-input {
+  width: 300px;
+  position:absolute;
+  top:47%; left:50%;
+  transform: translate(-50%, -50%);
+}
+.customer-div {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+} 
+.customer-div input {
+  width: 250px;
+  height: 20px;
+  border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.932);
+  background: rgba(240, 255, 240, 0.185);
+  font-family: 'Viga', sans-serif;
+  padding: 10px 20px;
+  color: rgba(162, 49, 255, 0.863);
+  font-size: 15px;
+}
+.customer-div input:hover {
+  border: 2px solid rgba(145, 108, 245, 0.616);
+}
+.customer-div input:focus {
+  /* input 클릭했을 때 검정 테두리 없애줌 */
+  outline: none !important;
+  border: 2px solid rgba(145, 108, 245, 0.616);
+  box-shadow: 0 0 20px rgba(145, 108, 245, 0.616);
+}
+.customer-button button {
+  justify-content: center;
+  width: 295px;
+  border-radius: 5px;
+  height: 40px;
+  transition: all ease 0.5s;
+  border: 1px solid rgba(255, 255, 255, 0.932);
+  background-color: rgba(255, 254, 255, 0.082);
+  font-family: 'Viga', sans-serif;
+  color: white;
+  font-size: 20px;
+}
+.customer-button button:hover {
+  cursor: pointer;
+  transform: scale( 1.1 );
 
+  background-color: #b86ffc49;
+}
+.customer-button button:focus {
+  outline: none !important;
+  border: 0;
+  border: 2px solid rgba(255, 200, 255, 0.616);
+  box-shadow: 0 0 20px rgba(255, 200, 255, 0.616);
+}
+.voda-logo {
+  width: 100%;
+  font-size: 180%;
+  text-align: center;
+  font-family: 'Cairo', sans-serif;
+  opacity: 0.9;
+  text-shadow: 2px 3px 0px #fdffeca9;
+  color: rgba(242, 177, 255, 0.733);
+}
 </style>

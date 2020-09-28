@@ -1,28 +1,30 @@
 <template>
   <div class="meeting-start">
-    <div class="room-title">
-      <h3>ooo님의 미팅룸</h3>
-    </div>
-    <!-- video-box 화면 대신임 -->
-    <div class="video-box">
-      <div class="video-header">
-        <div class='nickname-box'>
-          <a href="/voda/customer">nickname</a>
+    <div class="meeting-box">
+      <div class="room-title">
+        <h3>ooo님의 미팅룸</h3>
+      </div>
+      <!-- video-box 화면 대신임 -->
+      <div class="video-box">
+        <div class="video-header">
+          <div class='nickname-box'>
+            <a href="/voda/customer">nickname</a>
+          </div>
         </div>
-      </div>
-      <div class="video-center">
-        <img src="@/assets/profile.png" alt="" width="200" height="200">
-      </div>
-      <div class="video-bottom">
-        <span class="mike-img">
-          <img src="@/assets/mike.png" alt="" width="50" height="50">
-        </span>
-        <span class="film-img">
-          <img src="@/assets/film.png" alt="" width="50" height="50">
-        </span>
-        <span class="meeting-enter-button">
-          <a href="/enter/mettingroom"><button class="meeting-enter-link"><h5>참여하기</h5></button></a>
-        </span>
+        <div class="video-center">
+          <img src="@/assets/profile.png" alt="" width="200" height="200">
+        </div>
+        <div class="video-bottom">
+          <span class="mike-img">
+            <img src="@/assets/mike.png" alt="" width="50" height="50">
+          </span>
+          <span class="film-img">
+            <img src="@/assets/film.png" alt="" width="50" height="50">
+          </span>
+          <span class="meeting-enter-button">
+            <a href="/voda/meeting/room"><button class="meeting-enter-link"><h5>참여하기</h5></button></a>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -35,12 +37,32 @@ export default {
 </script>
 
 <style>
+.meeting-start{
+  background-image: linear-gradient(to left bottom, #c8f7f4, #c4f9f1, #c2fbed, #c2fde7, #c3fee0, #c3fee0, #c4ffe0, #c4ffe0, #c3ffe7, #c3ffee, #c5fff4, #c8fff9);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  font-family: 'Viga', sans-serif;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+}
 .video-box {
     background: gray;
     width: 800px;
     height: 500px;
     margin: 50px 100px;
-
+}
+.meeting-box {
+  width: 1000px;
+  position:absolute;
+  top:47%; left:50%;
+  transform: translate(-50%, -50%);
 }
 .nickname-box {
   width: 100px;
