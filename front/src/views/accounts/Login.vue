@@ -27,7 +27,6 @@ import axios from 'axios'
 const SERVER_URL = 'http://localhost:8000'
 
 export default {
-
   name: 'Login',
   data() {
     return {
@@ -54,6 +53,7 @@ export default {
         //res.data // {key : 'aasererasdfa'}
         //처리하고 다른 경로로 이동
         this.$router.push('/voda/meeting')
+        this.$emit('submit-login-data', this.loginData)
 
       })
       .catch(err => console.log(err.response.data))
@@ -78,7 +78,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .login {
   background-image: linear-gradient(to left bottom, #a4ccff, #adc9ff, #b7c7ff, #c3c3ff, #cec0ff, #d2c0ff, #d7bfff, #dbbfff, #d9c2ff, #d7c4ff, #d5c7ff, #d3c9ff);
   width: 100vw;
@@ -118,7 +118,7 @@ export default {
   font-family: 'Viga', sans-serif;
   padding: 10px 20px;
   color: rgba(162, 49, 255, 0.863);
-  font-size: 20px;
+  font-size: 15px;
 }
 .login-div input:hover {
   border: 2px solid rgba(145, 108, 245, 0.616);
@@ -148,11 +148,11 @@ export default {
 
   background-color: #b86ffc49;
 }
-.login-div button:focus {
+.login-button button:focus {
   outline: none !important;
   border: 0;
-  border: 2px solid rgba(255, 200, 255, 0.616);
-  box-shadow: 0 0 20px rgba(255, 200, 255, 0.616);
+  border: 2px solid rgba(203, 134, 235, 0.63);
+  box-shadow: 0 0 20px rgba(243, 175, 252, 0.747);
 }
 
 .voda-logo {

@@ -141,7 +141,7 @@ export default {
 
   background-color: #b86ffc49;
 }
-.signup-div button:focus {
+.signup-button button:focus {
   outline: none !important;
   border: 0;
   border: 2px solid rgba(255, 200, 255, 0.616);
