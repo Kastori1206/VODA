@@ -20,11 +20,17 @@ from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate
 from rest_framework_jwt.settings import api_settings
 from .models import User
+from rest_framework.authentication import (
+    BaseAuthentication, get_authorization_header
+)
 
 User = get_user_model()
 
+# JWT_PAYLOAD_GET_USER_ID_HANDLER = api_settings.JWT_PAYLOAD_GET_USER_ID_HANDLER
+
 JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
 JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
+jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
 
 
 class UserCreateSerializer(serializers.Serializer):
@@ -68,3 +74,14 @@ class UserLoginSerializer(serializers.Serializer):
             'email': user.email,
             'token': jwt_token
         }
+
+
+class UserTokenInfoSerializer(serializers.Serializer):
+    token = serializers.CharField(max_length=255, read_only=True)
+
+    def info(self, data):
+        token = data.get("token", None)
+        print("token: " + token)
+        payload = jwt_decode_handler(token)
+        print(payload)
+        return payload

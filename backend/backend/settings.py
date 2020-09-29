@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     # 'django.contrib.sites',
 
     #CORS
-    # 'corsheaders',
+    'corsheaders',
 
     #DRF
     'rest_framework',
@@ -71,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -221,8 +222,8 @@ JWT_AUTH = {
 
 
 # CORS Allow
-# CORS_ALLOW_ALL_ORIGINS = True
-
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 # ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # # ACCOUNT_AUTHENTICATION_METHOD = 'username'

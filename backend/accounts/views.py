@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 
-from .serializers import UserCreateSerializer, UserLoginSerializer
+from .serializers import UserCreateSerializer, UserLoginSerializer, UserTokenInfoSerializer
 from .models import User
 
 
@@ -35,5 +35,18 @@ def login(request):
         response = {
             'success': 'True',
             'token': serializer.data['token']
+        }
+        return Response(response, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def info(request):
+    if request.method == 'POST':
+        serializer = UserTokenInfoSerializer(data=request.data)
+        print(serializer)
+        response = {
+            # 'user': serializer.data['user'],
+            'payload': serializer.data['payload']
         }
         return Response(response, status=status.HTTP_200_OK)
