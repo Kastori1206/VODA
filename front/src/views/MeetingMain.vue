@@ -1,17 +1,17 @@
 <template>
   <div class="meeting-main">
     <div class="main-box">
-      <!-- <div class="header-choose">
+      <div class="header-choose">
         <a href="/mypage">My Page</a>
         <a href="/meeting/setting">Setting</a>
-      </div> -->
-      <!-- <div class="profile">
+      </div>
+      <div class="profile">
         <img src="https://www.thestatesman.com/wp-content/uploads/2017/08/1493458748-beauty-face-517.jpg" alt="" width="150" height="150">
-      </div> -->
+      </div>
       <div class="meeting-button">
-        <a href="/voda/meeting/start"><button>미팅룸 생성</button></a>
-        <!-- <a href="/reservate"><button>예약하기</button></a> -->
-        <a href="/voda/customer"><button>미팅룸 참여</button></a>
+        <a href="/voda/meeting/start"><button>미팅 참여</button></a>
+        <a href="/reservate"><button>예약하기</button></a>
+        <a href="/voda/customer"><button>손님으로 입장</button></a>
       </div>
     </div>
   </div>
@@ -47,39 +47,5 @@ export default {
   position:absolute;
   top:47%; left:50%;
   transform: translate(-50%, -50%);
-}
-.meeting-button {
-  
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;  
-}
-button {
-  font-weight: bolder;
-  width: 100%;
-  margin-bottom: 20px;  
-  padding: 50px 200px;
-  border-radius: 5px;
-  /* height: 40px; */
-  transition: all ease 0.5s;
-  border: 1px solid rgba(255, 255, 255, 0.932);
-  background-color: rgba(143, 255, 208, 0.233);
-  font-family: 'Viga', sans-serif;
-  color: white;
-  font-size: 20px;
-}
-button:hover {
-  cursor: pointer;
-  transform: scale( 1.1 );
-  font-weight: bolder;
-  background-color: #ffffff91;
-  color: rgba(80, 255, 153, 0.76)
-}
-button:focus {
-  outline: none !important;
-  border: 0;
-  border: 2px solid rgba(187, 255, 190, 0.616);
-  box-shadow: 0 0 20px rgba(121, 245, 169, 0.616);
 }
 </style>
