@@ -1,6 +1,9 @@
 <template>
+  <!-- <div id="meetingroom" :class="{sidemargin:sideOpen}">
+    <div class="sidebar" :class="{sidewidth:sideOpen}"> -->
   <div class="all-box">
     <div class="meetingroom" :class="{changeWidth: ismargin}">
+    <!-- <div class="meetingroom" :class="{sidemargin: isOpen}"> -->
       <div class="sidebar" :class="{sidewidth:isOpen}">
         <div class="btn-zip">
           <input type="radio" id="chat-btn" name="button" checked="checked">
@@ -25,19 +28,12 @@
           <div class="sign-lang-video" >수화영상</div>
         </div>
       </div>
-      <div class="videoBox">
-        <div class="video">
-          <div style="padding-bottom: 56.26%; background-color:red;"></div>
-          <div style="padding-bottom: 56.26%; background-color:yellow;"></div>
-          <div style="padding-bottom: 56.26%; background-color:orange;"></div>
-          <div style="padding-bottom: 56.26%; background-color:purple;"></div>
-          <!-- <div style="padding-bottom: 56.26%; background-color:blue;"></div> -->
-          <!-- <div style="padding-bottom: 56.26%; background-color:red;"></div> -->
-          <!-- <div style="padding-bottom: 56.26%; background-color:yellow;"></div> -->
-          <!-- <div style="padding-bottom: 56.26%; background-color:orange;"></div> -->
-          <!-- <div style="padding-bottom: 56.26%; background-color:purple;"></div> -->
-          <!-- <div style="padding-bottom: 56.26%; background-color:blue;"></div> -->
-        </div>
+      <div class="hello">
+        <div style="width:100%; padding-bottom: 56.26%; background-color:red;"></div>
+        <div style="width:100%; padding-bottom: 56.26%; background-color:yellow;"></div>
+        <div style="width:100%; padding-bottom: 56.26%; background-color:orange;"></div>
+        <div style="width:100%; padding-bottom: 56.26%; background-color:purple;"></div>
+        <div style="width:100%; padding-bottom: 56.26%; background-color:blue;"></div>
       </div> 
     </div>
     <div class='meeting-bottom'>
@@ -138,21 +134,10 @@ export default {
   font-size: 20px;
   /* overflow: hidden; */
 }
-.videoBox {
-  padding: 50px;
-  height: 500px;
+.hello {
   display: grid;
-}
-
-.video {
-  /* width: 80%; */
-  /* height: 80%; */
-  /* background: burlywood; */
-  display: grid;
-  grid-gap: 5px;
   grid-template-columns: repeat(auto-fit, minmax(30%, auto));
-  grid-template-rows: repeat(auto-fit, minmax(20%, auto));
-  justify-content: center;
+  grid-template-rows: repeat(2, 1fr);
   white-space: nowrap;
 }
 .hello div {
@@ -167,6 +152,7 @@ export default {
   right: 0;
   opacity: 0.9;
   overflow: hidden;
+
 }
 /* .container {
   display: grid;
@@ -281,6 +267,7 @@ export default {
 }
 
 .arrow_box:after {
+
   position: absolute;
   top: 100%;
   left: 50%;
@@ -300,6 +287,7 @@ export default {
 }
 .circle-btn:hover {
   cursor: pointer;
+  
 }
 
 .circle-btn i{
@@ -316,4 +304,8 @@ export default {
   
 }
 
+.hello {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
 </style>

@@ -1,86 +1,88 @@
 <template>
   <div class="login">
-    <div class='login-input'>
-        <div class="voda-logo">
-            <!-- <img alt="withus logo" src="@/assets/handwhite.png" width="250" height="230"> -->
-            <h1 class='voda-logo'>VODA</h1>
-        </div>
-        <div class="id-input login-div">
-          <label for="username">ID </label>
-          <input type="text" v-model="loginData.username" id="username">
-        </div>
-        <div class="password-input login-div">
-          <label for="password">PASSWORD  </label>
-          <input id="password" v-model="loginData.password" type="password">
-        </div>
-        <div class="login-button">
-            <!-- <a href="/meeting"><button @click="login">로그인하기</button></a>  -->
-            <button @click="login">LOGIN</button> 
-        </div>
+    <div class="login-input">
+      <div class="voda-logo">
+        <h1 class="voda-logo">VODA</h1>
+      </div>
+      <div class="id-input login-div">
+        <label for="email">EMAIL </label>
+        <input type="text" v-model="loginData.email" id="email" />
+      </div>
+      <div class="password-input login-div">
+        <label for="password">PASSWORD </label>
+        <input id="password" v-model="loginData.password" type="password" />
+      </div>
+      <div class="login-button">
+        <button @click="login">LOGIN</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import axios from 'axios'
-const SERVER_URL = 'http://localhost:8000'
 
 export default {
-  name: 'Login',
+  name: "Login",
   data() {
     return {
       loginData: {
-        username: null,
+        email: null,
         password: null,
       },
       isLoggedIn: false,
-    }
+    };
   },
   methods: {
-    // login() {
-    //   this.$emit('submit-login-data', this.loginData)
-    // }
-  setCookies(token) {
-    this.$cookies.set('auth-token', token)
-    this.isLoggedIn = true
-  },
-  login() {
-    console.log('login!', this.loginData)
-    axios.post(SERVER_URL + '/rest-auth/login/', this.loginData)
-      .then(res => {
-        this.setCookies(res.data.key)
-        //res.data // {key : 'aasererasdfa'}
-        //처리하고 다른 경로로 이동
-        this.$router.push('/voda/meeting')
-        this.$emit('submit-login-data', this.loginData)
+    login() {
+      let err = true;
+      let msg = "";
+      err &&
+        !this.loginData.email &&
+        ((msg = "이메일을 입력해주세요."), (err = false));
+      err &&
+        !this.verifyEmail() &&
+        ((msg = "이메일 양식을 확인해주세요."), (err = false));
+      err &&
+        !this.loginData.password &&
+        ((msg = "비밀번호를 입력해주세요."), (err = false));
 
-      })
-      .catch(err => console.log(err.response.data))
+      if (!err) alert(msg);
+      else {
+        console.log(this.loginData);
+        this.$emit("submit-login-data", this.loginData);
+      }
+    },
+    verifyEmail() {
+      var emailVal = this.loginData.email;
+      var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      if (emailVal.match(regExp) != null) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
-  mounted() {
-    //cookie에 auth-token이 존재하는지 체크
-    //mounted는 index.html에서 <div id="app"></div>에 접근하고 바로인 시점
-    //새로 고침 하지 않는 시점
-
-    // this.isLoggedIn = this.$cookies.isKey('auth-token') //? true : false
-    this.$nextTick(function() {
-      if (this.$cookies.isKey('auth-token')) {
-        this.isLoggedIn = true
-      } else {
-        this.isLoggedIn = false
-      }
-    }) 
-  }
-}
-
-
+};
 </script>
 
 <style scoped>
 .login {
-  background-image: linear-gradient(to left bottom, #a4ccff, #adc9ff, #b7c7ff, #c3c3ff, #cec0ff, #d2c0ff, #d7bfff, #dbbfff, #d9c2ff, #d7c4ff, #d5c7ff, #d3c9ff);
+  background-image: linear-gradient(
+    to left bottom,
+    #a4ccff,
+    #adc9ff,
+    #b7c7ff,
+    #c3c3ff,
+    #cec0ff,
+    #d2c0ff,
+    #d7bfff,
+    #dbbfff,
+    #d9c2ff,
+    #d7c4ff,
+    #d5c7ff,
+    #d3c9ff
+  );
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -90,14 +92,15 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 1;
-  font-family: 'Viga', sans-serif;
+  font-family: "Viga", sans-serif;
   color: rgb(255, 255, 255);
   font-size: 20px;
 }
 .login-input {
   width: 300px;
-  position:absolute;
-  top:47%; left:50%;
+  position: absolute;
+  top: 47%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -105,7 +108,7 @@ export default {
   display: inline-block;
   width: 100%;
   margin-bottom: 20px;
-} 
+}
 .login-div label {
   display: block;
 }
@@ -115,7 +118,7 @@ export default {
   border-radius: 5px;
   border: 2px solid rgba(255, 255, 255, 0.932);
   background: rgba(240, 255, 240, 0.185);
-  font-family: 'Viga', sans-serif;
+  font-family: "Viga", sans-serif;
   padding: 10px 20px;
   color: rgba(162, 49, 255, 0.863);
   font-size: 15px;
@@ -138,13 +141,13 @@ export default {
   transition: all ease 0.5s;
   border: 1px solid rgba(255, 255, 255, 0.932);
   background-color: rgba(255, 254, 255, 0.082);
-  font-family: 'Viga', sans-serif;
+  font-family: "Viga", sans-serif;
   color: white;
   font-size: 20px;
 }
 .login-button button:hover {
   cursor: pointer;
-  transform: scale( 1.1 );
+  transform: scale(1.1);
 
   background-color: #b86ffc49;
 }
@@ -159,7 +162,7 @@ export default {
   width: 100%;
   font-size: 180%;
   text-align: center;
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
   opacity: 0.9;
   text-shadow: 2px 3px 0px #f1f1f1;
   color: rgb(210, 170, 255);
@@ -170,6 +173,4 @@ export default {
   display: block;
   margin: 0 auto;
 }
-
-
 </style>
