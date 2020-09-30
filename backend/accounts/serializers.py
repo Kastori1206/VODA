@@ -30,7 +30,7 @@ User = get_user_model()
 
 JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
 JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
-jwt_decode_handler = api_settings.JWT_DECODE_HANDLER
+JWT_DECODE_HANDLER = api_settings.JWT_DECODE_HANDLER
 
 
 class UserCreateSerializer(serializers.Serializer):
@@ -52,6 +52,7 @@ class UserLoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=64)
     password = serializers.CharField(max_length=128, write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
+    username = serializers.CharField(max_length=255, read_only=True)
 
     def validate(self, data):
         email = data.get("email", None)
@@ -72,16 +73,6 @@ class UserLoginSerializer(serializers.Serializer):
             )
         return {
             'email': user.email,
-            'token': jwt_token
+            'token': jwt_token,
+            'username': str(user)
         }
-
-
-class UserTokenInfoSerializer(serializers.Serializer):
-    token = serializers.CharField(max_length=255, read_only=True)
-
-    def info(self, data):
-        token = data.get("token", None)
-        print("token: " + token)
-        payload = jwt_decode_handler(token)
-        print(payload)
-        return payload

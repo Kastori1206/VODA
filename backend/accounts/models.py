@@ -3,12 +3,12 @@
 
 
 # Create your models here.
-#확장성 보장
+# 확장성 보장
 # class Member(models.Model):
 #     m_id = models.AutoField(db_column='m_id', primary_key=True)
 #     m_pw = models.CharField(db_column='m_pw',max_length=100)
 #     m_name = models.CharField(db_column='m_name',max_length=100)
-#     m_email = models.CharField(db_column='m_email',max_length=100)    
+#     m_email = models.CharField(db_column='m_email',max_length=100)
 
 #     class Meta:
 #         managed = False
@@ -18,7 +18,7 @@
 #     j_id = models.AutoField(db_column='j_id', primary_key=True)
 #     r_id = models.IntegerField(db_column='r_id')
 #     m_id = models.IntegerField(db_column='m_id')
-    
+
 
 #     class Meta:
 #         managed = False
@@ -28,7 +28,7 @@
 #     r_id = models.AutoField(db_column='r_id', primary_key=True)
 #     m_id = models.IntegerField(db_column='m_id')
 #     r_startTime = models.DateField(db_column='r_starttime')
-#     r_endTime = models.DateField(db_column='r_endtime')    
+#     r_endTime = models.DateField(db_column='r_endtime')
 
 #     class Meta:
 #         managed = False
@@ -38,7 +38,7 @@
 #     ri_id = models.AutoField(db_column='ri_id', primary_key=True)
 #     r_id = models.IntegerField(db_column='r_id')
 #     ri_text = models.CharField(db_column='ri_text',max_length=100)
-    
+
 
 #     class Meta:
 #         managed = False
@@ -49,7 +49,7 @@
 #     s_name = models.CharField(db_column='s_name',max_length=100)
 #     s_path = models.CharField(db_column='s_path',max_length=100)
 #     s_type = models.CharField(db_column='s_type',max_length=100)
-    
+
 
 #     class Meta:
 #         managed = False
@@ -105,7 +105,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
-        help_text=_('Designates whether the user can log into this admin site.'),
+        help_text=_(
+            'Designates whether the user can log into this admin site.'),
     )
     is_active = models.BooleanField(
         _('active'),
