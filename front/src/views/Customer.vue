@@ -10,8 +10,8 @@
           <input type="text" id="nickname">
         </div>
         <div class="customer-div">
-          <label for="roomlink">ROOM LINK</label> 
-          <input type="text" id="roomlink">
+          <label for="email">EMAIL</label> 
+          <input type="text" id="email">
         </div>
         <div class="customer-button">
             <a href="/voda/meeting/start"><button>다음</button></a>

@@ -1,4 +1,6 @@
 <template>
+  <!-- <div id="meetingroom" :class="{sidemargin:sideOpen}">
+    <div class="sidebar" :class="{sidewidth:sideOpen}"> -->
   <div class="all-box">
     <div class="meetingroom" :class="{'changeWidth': ismargin}">
       <div class="sidebar" :class="{'sidewidth':isOpen}">
@@ -439,6 +441,7 @@ export default {
 }
 
 .arrow_box:after {
+
   position: absolute;
   top: 100%;
   left: 50%;
@@ -461,6 +464,7 @@ export default {
 }
 .circle-btn:hover {
   cursor: pointer;
+  
 }
 
 .circle-btn i{
@@ -477,4 +481,8 @@ export default {
   
 }
 
+.hello {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
 </style>
