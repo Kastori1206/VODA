@@ -3,7 +3,7 @@
     <div class='login-input'>
         <div class="voda-logo">
             <!-- <img alt="withus logo" src="@/assets/handwhite.png" width="250" height="230"> -->
-            <h1 class='voda-logo'>VODA</h1>
+            <h1 class='voda-logo'>LOGIN</h1>
         </div>
         <div class="id-input login-div">
           <label for="username">ID </label>

@@ -34,4 +34,8 @@ body {
   width: 100vh;
   height: 100vh;
 }
+::selection {
+  color: rgb(203, 37, 253);
+  background: rgb(255, 255, 255);
+}
 </style>

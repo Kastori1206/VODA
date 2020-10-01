@@ -3,14 +3,14 @@
       <div class="signup-input">
         <div class="voda-logo">
           <!-- <img alt="voda logo" src="@/assets/logo_transparent.png" width="300" height="300"> -->
-          <h1 class="voda-logo">VODA</h1>
+          <h1 class="voda-logo">SIGNUP</h1>
         </div>
         <div class="s-email-input signup-div">
           <label for="email">EMAIL </label>
           <input type="text" v-model="signupData.email" id="email">
         </div>
          <div class="s-id-input signup-div">
-          <label for="username">NiCK NAME </label>
+          <label for="username">NICKNAME </label>
           <input type="text" v-model="signupData.username" id="username">
         </div>
         <div class="s-password1-input signup-div">
