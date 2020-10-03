@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.generics import RetrieveAPIView
 
-from .serializers import UserCreateSerializer, UserLoginSerializer
+from .serializers import UserCreateSerializer, UserLoginSerializer, UserSerializer
 from .models import User
 
 
@@ -34,9 +34,19 @@ def login(request):
             return Response({'message': 'fail'}, status=status.HTTP_200_OK)
 
         response = {
-            'success': 'True',
+            'message': 'True',
             'token': serializer.data['token'],
-            'email': serializer.data['email'],
-            'username': serializer.data['username']
+            # 'email': serializer.data['email'],
+            # 'username': serializer.data['username']
         }
         return Response(response, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def info(request):
+    if request.method == 'POST':     
+        return Response({
+            "email": request.user.email,
+            "username" : request.user.username,
+            "id" : request.user.id
+        }, status=status.HTTP_200_OK)

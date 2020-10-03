@@ -26,22 +26,27 @@ export default {
           loginData
         )
         .then((res) => {
-          this.$cookies.set("token", res.data.token); //토큰 날라오는거 설정해줘야함!!
-          this.isLoggedIn = true;
-          this.$router.push("/voda/meeting");
-          alert("로그인 되었습니다.");
+          if (res.data.message === "True") {
+            this.$cookies.set("token", res.data.token); //토큰 날라오는거 설정해줘야함!!
+            this.isLoggedIn = true;
+            this.$router.push("/voda/meeting");
+            alert("로그인 되었습니다.");
+          } else {
+            alert(
+              "존재하지 않는 계정입니다. 아이디와 비밀번호를 다시 확인해주세요"
+            );
+          }
         })
         .catch(() => {
           // console.log(err);
-          alert(
-            "존재하지 않는 계정입니다. 아이디와 비밀번호를 다시 확인해주세요"
-          );
+          alert("서버에러입니다. 관리자에게 문의하세요");
         });
     },
     logout() {
       alert("로그아웃 되었습니다.");
       this.$cookies.remove("token");
       this.isLoggedIn = false;
+      this.$router.push("/voda");
     },
   },
   mounted() {

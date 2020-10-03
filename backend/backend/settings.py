@@ -38,13 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #register(회원가입)
+    # register(회원가입)
     # 'django.contrib.sites',
 
-    #CORS
+    # CORS
     'corsheaders',
 
-    #DRF
+    # DRF
     'rest_framework',
     # 'rest_framework.authtoken',
 
@@ -55,11 +55,12 @@ INSTALLED_APPS = [
     # 'allauth.account',
     # 'rest_auth.registration',
 
-    #My App
+    # My App
     'accounts',
-    'articles',
-    
-   
+    'room'
+    # 'articles',
+
+
 
 ]
 
@@ -98,7 +99,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-#sqlite3
+# sqlite3
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -110,14 +111,17 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ssafydb',
-        'USER':'ssafy',#DB에 접속할때 설정한 이름
-        'PASSWORD':'0forever',#DB에 접속할때 설정한 비밀번호
-        'HOST':'j3d206.p.ssafy.io',
-        'PORT':'3306',
+        'USER': 'ssafy',  # DB에 접속할때 설정한 이름
+        'PASSWORD': '0forever',  # DB에 접속할때 설정한 비밀번호
+        'HOST': 'j3d206.p.ssafy.io',
+        'PORT': '3306',
     },
-    'OPTIONS': { 'init_command': 'SET storage_engine=INNODB;' },
-}
+    # 'OPTIONS': {'init_command': 'SET storage_engine=INNODB;'},
+    'OPTIONS': {
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  # strict mode 설정 추가
 
+    }
+}
 
 
 # Password validation
@@ -160,10 +164,10 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-#django sites app setting
+# django sites app setting
 SITE_ID = 1
 
-#DRF auth settings
+# DRF auth settings
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,

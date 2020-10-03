@@ -8,5 +8,6 @@ urlpatterns = [
     path('token/', obtain_jwt_token),
     path('verify/', verify_jwt_token),
     path('refresh/', refresh_jwt_token),
+    path('info/',views.info)
 
 ]
