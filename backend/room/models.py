@@ -12,8 +12,8 @@ class Room(models.Model):
     r_startTime = models.DateTimeField(auto_now_add=True)
     r_endTime = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return "[r_id:" + self.r_id + "user:" + self.user + "r_startTime:" + self.r_startTime + "r_endTime:" + self.r_endTime
+    # def __str__(self):
+    #     return "[r_id:" + self.r_id + "user:" + self.user + "r_startTime:" + self.r_startTime + "r_endTime:" + self.r_endTime
 
 
 class JoinInfo(models.Model):

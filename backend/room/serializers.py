@@ -1,18 +1,21 @@
 from rest_framework import serializers
-from .models import Article
+from accounts.models import User
 from accounts.serializers import UserSerializer
+from .models import (Room, JoinInfo, RecodeInfo, SignLang)
 
-class ArticleListSerializer(serializers.ModelSerializer):
+
+class RoomSerializer(serializers.ModelSerializer):
+    user = UserSerializer(required=False)
+
     class Meta:
-        model = Article
-        fields = ['id', 'title', 'created_at']
+        model = Room
+        fields = '__all__'
 
 
-class ArticleSerializer(serializers.ModelSerializer):
-    #user와 엮어서 이해하기
-    # required=False => 
-    #views.py에서의 is_valid() 에서 유무검증 pass 
-    user = UserSerializer(required=False)  
-    class Meta: 
-        model = Article
+class JoinInfoSerializer(serializers.ModelSerializer):
+    user = UserSerializer(required=False)
+    room = RoomSerializer(required=False)
+
+    class Meta:
+        model = JoinInfo
         fields = '__all__'
