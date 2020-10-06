@@ -1,23 +1,9 @@
 <template>
   <div class="meeting-main">
     <div class="main-box">
-      <div class="header-choose">
-        <a href="/mypage">My Page</a>
-        <a href="/meeting/setting">Setting</a>
-      </div>
-      <div class="profile">
-        <img
-          src="https://www.thestatesman.com/wp-content/uploads/2017/08/1493458748-beauty-face-517.jpg"
-          alt=""
-          width="150"
-          height="150"
-        />
-      </div>
       <div class="meeting-button">
-        <a href="/voda/meeting/start"><button>미팅 참여</button></a>
-        <a href="/reservate"><button>예약하기</button></a>
-        <a href="/voda/customer"><button>손님으로 입장</button></a>
-        <a href="http://localhost:8001?test=test"><button>test</button></a>
+        <a href="/voda/meeting/start"><button>미팅룸 생성</button></a>
+        <a href="/reservate"><button>미팅룸 참여</button></a>
       </div>
     </div>
   </div>
@@ -25,48 +11,66 @@
 
 <script>
 export default {
-  name: "MeetingMain",
-};
+    name: 'MeetingMain',
+    title: 'VODA | Choose',
+}
 </script>
 
 <style scoped>
-.profile img {
-  border-radius: 50%;
-}
-.meeting-main {
-  background-image: linear-gradient(
-    to left bottom,
-    #c8f7f4,
-    #c4f9f1,
-    #c2fbed,
-    #c2fde7,
-    #c3fee0,
-    #c3fee0,
-    #c4ffe0,
-    #c4ffe0,
-    #c3ffe7,
-    #c3ffee,
-    #c5fff4,
-    #c8fff9
-  );
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  margin: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  font-family: "Viga", sans-serif;
-  color: rgb(255, 255, 255);
-  font-size: 20px;
-}
-.main-box {
-  width: 100vh;
-  position: absolute;
-  top: 47%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+  .meeting-main {
+    background-image: linear-gradient(to right top, #ffb9f0, #fcb8f2, #f9b6f4, #f5b5f7, #f1b4f9, #f0b2f9, #efb0fa, #eeaefa, #f1aaf9, #f3a6f7, #f6a2f5, #f99ef3);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    margin: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    font-family: "Viga", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+  }
+  .main-box {
+    width: 100vh;
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .meeting-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  button {
+    font-weight: bolder;
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 50px 200px;
+    border-radius: 5px;
+    /* height: 40px; */
+    transition: all ease 0.5s;
+    border: 1px solid rgba(255, 255, 255, 0.932);
+    background-color: rgba(250, 176, 250, 0.233);
+    font-family: "Viga", sans-serif;
+    color: white;
+    font-size: 20px;
+  }
+  button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    font-weight: bolder;
+    background-color: #c98af391;
+    color: rgba(163, 101, 179, 0.76);
+    box-shadow: 0 0 20px rgba(225, 65, 247, 0.616);
+  }
+  button:focus {
+    outline: none !important;
+    border: 0;
+    border: 2px solid rgba(167, 47, 236, 0.616);
+    box-shadow: 0 0 20px rgba(225, 65, 247, 0.616);
+  }
 </style>

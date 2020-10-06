@@ -3,15 +3,15 @@
       <div class="customer-input">
         <div class="voda-logo">
           <!-- <img alt="voda logo" src="../assets/logo_transparent.png" width="300" height="300"> -->
-          <h1>VODA</h1>
+          <h1>CUSTOMER</h1>
         </div>
         <div class="customer-div">
           <label for="nickname">NICKNAME</label>
           <input type="text" id="nickname">
         </div>
         <div class="customer-div">
-          <label for="email">EMAIL</label> 
-          <input type="text" id="email">
+          <label for="roomlink">ROOM LINK</label> 
+          <input type="text" id="roomlink">
         </div>
         <div class="customer-button">
             <a href="/voda/meeting/start"><button>다음</button></a>
@@ -23,12 +23,16 @@
 <script>
 export default {
     name: 'Customer',
+    title: 'VODA | 미팅룸 참여',
 }
 </script>
 
-<style>
+<style scoped>
 .customer {
-  background-image: linear-gradient(to left bottom, #f2aaf6, #ebb1fa, #e4b7fd, #ddbdfe, #d8c2ff, #d9c4ff, #dbc6ff, #dcc8ff, #e4c8ff, #ecc8ff, #f4c8ff, #fcc8ff);
+  /* background-image: linear-gradient(to left bottom, #f2aaf6, #ebb1fa, #e4b7fd, #ddbdfe, #d8c2ff, #d9c4ff, #dbc6ff, #dcc8ff, #e4c8ff, #ecc8ff, #f4c8ff, #fcc8ff); */
+  background: linear-gradient(-45deg, #cddcff, rgb(232, 200, 253),#c966ff , #d8c2ff);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -41,6 +45,17 @@ export default {
   font-family: 'Viga', sans-serif;
   color: rgb(255, 255, 255);
   font-size: 20px;
+}
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
 }
 .customer-input {
   width: 300px;
@@ -88,7 +103,6 @@ export default {
 .customer-button button:hover {
   cursor: pointer;
   transform: scale( 1.1 );
-
   background-color: #b86ffc49;
 }
 .customer-button button:focus {
@@ -98,12 +112,15 @@ export default {
   box-shadow: 0 0 20px rgba(255, 200, 255, 0.616);
 }
 .voda-logo {
-  width: 100%;
-  font-size: 180%;
+  width: 200%;
+  font-size: 130%;
   text-align: center;
   font-family: 'Cairo', sans-serif;
   opacity: 0.9;
   text-shadow: 2px 3px 0px #fdffeca9;
   color: rgba(242, 177, 255, 0.733);
+  display: flex;
+  align-items: center;
+  /* margin: 0 auto; */
 }
 </style>

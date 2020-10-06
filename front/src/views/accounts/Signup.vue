@@ -3,7 +3,7 @@
     <div class="signup-input">
       <div class="voda-logo">
         <!-- <img alt="voda logo" src="@/assets/logo_transparent.png" width="300" height="300"> -->
-        <h1 class="voda-logo">VODA</h1>
+        <h1 class="voda-logo">SIGNUP</h1>
       </div>
 
       <div class="s-email-input signup-div">
@@ -34,6 +34,7 @@ import axios from "axios";
 
 export default {
   name: "Signup",
+  title: 'VODA | Signup',
   data() {
     return {
       email: null,
@@ -94,21 +95,9 @@ export default {
 
 <style scoped>
 .signup {
-  background-image: linear-gradient(
-    to right bottom,
-    #96afff,
-    #a6b2ff,
-    #b5b6ff,
-    #c2baff,
-    #cebeff,
-    #d1bdff,
-    #d4bdff,
-    #d7bcff,
-    #d2b6ff,
-    #cdb1ff,
-    #c8abff,
-    #c3a6ff
-  );
+  background: linear-gradient(-30deg, #e8c6ff, #bdabff,#eba9ff , #c061ff);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -121,6 +110,17 @@ export default {
   font-family: "Viga", sans-serif;
   color: rgb(255, 255, 255);
   font-size: 20px;
+}
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
 }
 .signup-input {
   width: 300px;
