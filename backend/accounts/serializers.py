@@ -76,3 +76,9 @@ class UserLoginSerializer(serializers.Serializer):
             'token': jwt_token,
             'username': str(user)
         }
+
+
+class UserSerializer(serializers.Serializer):
+    class Mata:
+        model = User
+        fields = ['id', 'email', 'username']

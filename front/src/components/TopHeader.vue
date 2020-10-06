@@ -13,7 +13,7 @@
     <ul class="header-ul" v-if="isLoggedIn">
       <li>
         <router-link to="/voda/mypage/"
-          >{{ username }}님 환영합니다.</router-link
+          >{{ memberInfo.username }}님 환영합니다.</router-link
         >
       </li>
       <li @click="logout">
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Header",
   props: {
@@ -40,9 +42,9 @@ export default {
   data() {
     return {
       memberInfo: {
-        mid: null,
-        email: null,
-        username: null,
+        id: "",
+        email: "",
+        username: "",
       },
     };
   },
@@ -50,6 +52,28 @@ export default {
     logout() {
       this.$emit("submit-logout");
     },
+    info() {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${this.$cookies.get("token")}`,
+        },
+      };
+      axios
+        .post(
+          process.env.VUE_APP_DJANGO_API_SERVER_URL + "api/users/info/",
+          null,
+          config
+        )
+        .then((res) => {
+          this.memberInfo = res.data;
+        })
+        .catch(() => {
+          // console.log(err);
+        });
+    },
+  },
+  mounted() {
+    this.info();
   },
 };
 </script>
