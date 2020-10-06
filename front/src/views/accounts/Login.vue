@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-input">
       <div class="voda-logo">
-        <h1 class="voda-logo">VODA</h1>
+        <h1 class="voda-logo">LOGIN</h1>
       </div>
       <div class="id-input login-div">
         <label for="email">EMAIL </label>
@@ -24,6 +24,7 @@
 
 export default {
   name: "Login",
+  title: 'VODA | Login',
   data() {
     return {
       loginData: {
@@ -68,21 +69,9 @@ export default {
 
 <style scoped>
 .login {
-  background-image: linear-gradient(
-    to left bottom,
-    #a4ccff,
-    #adc9ff,
-    #b7c7ff,
-    #c3c3ff,
-    #cec0ff,
-    #d2c0ff,
-    #d7bfff,
-    #dbbfff,
-    #d9c2ff,
-    #d7c4ff,
-    #d5c7ff,
-    #d3c9ff
-  );
+  background: linear-gradient(-45deg, #a4ccff, #cec4ff,#f6daff , #adc9ff);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -96,6 +85,18 @@ export default {
   color: rgb(255, 255, 255);
   font-size: 20px;
 }
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
 .login-input {
   width: 300px;
   position: absolute;

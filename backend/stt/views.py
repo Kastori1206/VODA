@@ -16,5 +16,5 @@ def stt(request):
     print(request.data)
     a=[]
     for sent in kss.split_sentences(request.data['text']):
-        a.append(hannanum.nouns(sent))
+        a.append(hannanum.pos(sent))
     return Response(a)

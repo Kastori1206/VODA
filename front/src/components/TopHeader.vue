@@ -12,9 +12,7 @@
     </a>
     <ul class="header-ul" v-if="isLoggedIn">
       <li>
-        <router-link to="/voda/mypage/"
-          >{{ memberInfo.username }}님 환영합니다.</router-link
-        >
+        <p>{{ memberInfo.username }}님 환영합니다.</p>
       </li>
       <li @click="logout">
         <router-link to="/voda">Logout</router-link>
@@ -26,6 +24,9 @@
       </li>
       <li>
         <router-link to="/voda/signup/">Signup</router-link>
+      </li>
+      <li>
+        <router-link to="/voda/customer/">Customer</router-link>
       </li>
     </ul>
   </div>
@@ -80,8 +81,9 @@ export default {
 
 
 <style scoped>
-a {
+a, p {
   text-decoration: none;
+  font-family: "Viga", sans-serif;
   color: white;
 }
 .header {
@@ -104,6 +106,13 @@ a {
   list-style: none;
 }
 .header-ul li {
+  display: flex;
   padding: 10px 12px;
+  justify-content: center;
+  align-items:center;
+}
+.header-ul li a {
+  display: flex;
+  align-items:center;
 }
 </style>

@@ -7,8 +7,8 @@ import Customer from "../views/Customer.vue";
 import MeetingMain from "../views/MeetingMain.vue";
 import MeetingStart from "../views/MeetingStart.vue";
 import MeetingRoom from "../views/MeetingRoom.vue";
-import Mypage from "../views/Mypage.vue";
-import Setting from "../views/Setting.vue";
+// import Mypage from "../views/Mypage.vue";
+// import Setting from "../views/Setting.vue";
 
 Vue.use(VueRouter);
 export default new VueRouter({
@@ -18,6 +18,7 @@ export default new VueRouter({
       path: "/",
       name: "MainChoose",
       component: MainChoose,
+      meta: { title: " VODA | 청각자애인을 위한 화상회의 서비스" }
     },
     {
       path: "/voda",
@@ -44,21 +45,21 @@ export default new VueRouter({
       name: "MeetingMain",
       component: MeetingMain,
     },
-    {
-      path: "/voda/mypage",
-      name: "Mypage",
-      component: Mypage,
-    },
+    // {
+    //   path: "/voda/mypage",
+    //   name: "Mypage",
+    //   component: Mypage,
+    // },
     {
       path: "/voda/meeting/start",
       name: "MeetingStart",
       component: MeetingStart,
     },
-    {
-      path: "/voda/meeting/setting",
-      name: "Setting",
-      component: Setting,
-    },
+    // {
+    //   path: "/voda/meeting/setting",
+    //   name: "Setting",
+    //   component: Setting,
+    // },
     {
       path: "/voda/meeting/room",
       name: "MeetingRoom",

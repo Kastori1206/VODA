@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import VueCookies from 'vue-cookies'
+import titleMixin from './mixins/titleMixin'
+
+Vue.mixin(titleMixin)
 
 Vue.use(VueCookies)
 
