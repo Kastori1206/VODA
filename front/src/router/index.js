@@ -18,30 +18,25 @@ export default new VueRouter({
       path: "/",
       name: "MainChoose",
       component: MainChoose,
-      meta: { title: " VODA | 청각자애인을 위한 화상회의 서비스" }
+      meta: { title: " VODA | 청각자애인을 위한 화상회의 서비스" },
     },
     {
-      path: "/voda",
-      name: "MainChoose",
-      component: MainChoose,
-    },
-    {
-      path: "/voda/login",
+      path: "/login",
       name: "Login",
       component: Login,
     },
     {
-      path: "/voda/signup",
+      path: "/signup",
       name: "Signup",
       component: Signup,
     },
     {
-      path: "/voda/customer",
+      path: "/customer",
       name: "Customer",
       component: Customer,
     },
     {
-      path: "/voda/meeting",
+      path: "/meeting",
       name: "MeetingMain",
       component: MeetingMain,
     },
@@ -51,7 +46,7 @@ export default new VueRouter({
     //   component: Mypage,
     // },
     {
-      path: "/voda/meeting/start",
+      path: "/meeting/start",
       name: "MeetingStart",
       component: MeetingStart,
     },
@@ -61,7 +56,7 @@ export default new VueRouter({
     //   component: Setting,
     // },
     {
-      path: "/voda/meeting/room",
+      path: "/meeting/room",
       name: "MeetingRoom",
       component: MeetingRoom,
     },
