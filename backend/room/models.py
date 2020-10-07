@@ -30,8 +30,4 @@ class RecodeInfo(models.Model):
     ri_text = models.TextField()
 
 
-class SignLang(models.Model):
-    s_id = models.AutoField(primary_key=True)
-    s_name = models.CharField(max_length=100)
-    s_path = models.CharField(max_length=255)
-    s_type = models.CharField(max_length=255)
+

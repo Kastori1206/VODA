@@ -44,7 +44,7 @@
 |    JS     |  Vue.js   |        TensorFlow        |
 |           |  Node.js  |          OpenCV          |
 |           |  MariaDB  | Google STT(음성 -> Text) |
-|           |  Django   |      KSS(문장 분리)      |
+|           |           |      KSS(문장 분리)      |
 
 ## 기술 설명
 
@@ -54,8 +54,32 @@
 
 ### 디렉토리 구조도
 
-> 폴더 구조가 어떻게 되는지 폴더, 파일별 역할들을 간략하게 적어주세요  
-> 너무 자세히 적을 필요는 없습니다
+```
+VODA
+  └───VODARTC               : 화상 미팅 서비스(WEBRTC)
+  │     └───hand            : tensorflow handpose를 이용한 지화 인식
+  │     └───voda
+  │       └───create        : 로그인 유저 방생성 및 방참가 페이지
+  │       └───join          : 비로그인 유저 방참가 페이지
+  │
+  └───backend               : Django Rest Server
+  │     └───account         : 회원가입, 정보, 로그인
+  │     └───backend         : Django 설정
+  │     └───hand            : tensorflow 사용하여 손 뼈대 이미지 분석
+  │     └───room            : 방생성 정보, 회의록 기록, 참가기록
+  │     └───stt             : 텍스트 데이터 문장분석, 형태소 분석, 후 수어 영상 경로 리턴
+  │
+  └───doc                   : readme에 필요한 자료 모음
+  │
+  └───front                 : vue.js
+  │     └───src
+  │       └───views         : 메인화면, 로그인, 회원가입, 손님
+  │       └───components    : 헤더
+  │       └───router        : url 관리
+  │
+  └───산출물                : 산출물
+
+```
 
 ### 시퀀스 다이어그램
 
@@ -68,3 +92,7 @@
 ## 테스트 방법
 
 > 프로젝트를 배포한 url과 테스트하기 위한 계정 ID/PW를 적어주세요
+
+```
+
+```

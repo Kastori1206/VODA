@@ -27,7 +27,8 @@
       </li>
       <li>
         <!-- <router-link to="/customer/">Customer</router-link> -->
-        <a href="https://j3d206.p.ssafy.io:8001/voda/join/">Customer</a>
+        <!-- <a href="https://j3d206.p.ssafy.io:8001/voda/join/">Customer</a> -->
+        <a href="/customer">Customer</a>
       </li>
     </ul>
   </div>

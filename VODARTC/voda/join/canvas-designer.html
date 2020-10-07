@@ -8,9 +8,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>
-      Dashboard + Video Conferencing + Chat + File Sharing | RTCMultiConnection
-    </title>
+    <title>VODA | roomJoin</title>
     <meta
       name="description"
       content="WebRTC Dashboard including support for canvas drawing, canvas data syncing, video conferencing, screen sharing and video conferencing. Including chat and file sharing."
@@ -88,7 +86,7 @@
       #conversation-panel {
         margin-bottom: 20px;
         text-align: left;
-        max-height: 200px;
+        max-height: 180px;
         overflow: auto;
         border-top: 1px solid #e5e5e5;
         width: 106%;
@@ -145,9 +143,10 @@
       #result {
         margin-bottom: 20px;
         padding: 10px 20px;
-        height: 150px;
-        border: solid 1px #000;
+        height: 300px;
+        /* border: solid 1px #000; */
         border-radius: 6px;
+        overflow: auto;
       }
       #result span {
         line-height: 1.5;
@@ -250,7 +249,7 @@
               for="record-btn"
               id="record-label"
               class="btn-item record-btn"
-              >기록</label
+              >회의록</label
             >
           </div>
           <div class="chosed-box">
@@ -286,13 +285,23 @@
                 <!-- <div style="padding: 5px 10px">
                   <div id="onUserStatusChanged"></div>
                 </div> -->
-                <video></video>
+                <video
+                  autoplay="autoplay"
+                  muted="muted"
+                  id="player"
+                  class="playermp4"
+                  width="300px"
+                  height="225px"
+                  controls
+                >
+                  <source name="MMPlayer" type="video/mp4" />
+                </video>
               </div>
             </div>
             <div id="recode-boxid">
               <div id="recodeboxact" class="record-box active">
                 <!--stt  -->
-                <div id="result" style="background-color: #000">
+                <div id="result">
                   <span class="final" id="final_span"></span>
                   <span class="interim" id="interim_span"></span>
                   <span class="log" id="audio_text_log"></span>
@@ -364,7 +373,14 @@
     <!-- <script src="../js/main.js"></script> -->
 
     <script>
-      let reg = false;
+      let reg = false; // 기록
+      // let data = []; // 수어영상
+      // let newdata = []; // 추가할 수어영상
+      let caption_temp = "";
+      let prev_caption = "";
+      let data = [];
+      let newdata = [];
+      let hand_jesture_flag = false;
       /*!
        *
        * WebRTC Lab
@@ -373,186 +389,238 @@
        */
       let audio_log = "";
       // let log_flag = false;
+      function hand_jesture_clock() {
+        console.log("hand_jesture_clock()");
+        console.log("caption_temp", caption_temp);
+        if (hand_jesture_flag) {
+          if (caption_temp != prev_caption) {
+            prev_caption = caption_temp;
+            asyncload_video_streams(caption_temp);
+          }
+          let timerId = setTimeout(hand_jesture_clock, 2000);
+        }
+      }
+
+      function asyncload_video_streams(send_data) {
+        console.log("asyncload_video_streams()");
+        console.log(send_data);
+        let obj_data = new Object();
+        // data.text = caption_temp;
+        obj_data.text = send_data;
+        $.ajax({
+          type: "POST",
+          data: obj_data,
+          url: "https://j3d206.p.ssafy.io/api/stt/",
+          dataType: "json",
+          success: function (data_mp4) {
+            // console.log("recieve!! :", data_mp4);
+            if (data.length) {
+              data.push(...data_mp4);
+            } else {
+              data.push(...data_mp4);
+              // console.log(data);
+              video_streamer();
+            }
+          },
+        });
+      }
+      function video_streamer() {
+        console.log("video_streamer()");
+
+        document.getElementById("player").src = data[0];
+
+        // document.getElementById("player").src = data[0];
+        console.log("DATA!!!!", data);
+        // console.log("check!!!!", data[0]);
+        document
+          .getElementById("player")
+          .addEventListener("ended", function () {
+            data.shift();
+            if (data.length == 0) {
+              return; // 리턴안하고 아래줄을 if문으로 실행하는 listener만들기 listener는 클릭이벤트에따라 변화하는 boolenan을 볼것
+            }
+            document.getElementById("player").src = data[0];
+            console.log("check!!!!", data[0]);
+          });
+      }
+      var converlogPanel = document.getElementById("result");
 
       function audio_log_listener() {
         if (!$("#recodeboxact").hasClass("active")) {
           console.log(audio_log);
           audio_text_log.innerHTML = "<p>" + audio_log + "</p>";
-          setTimeout(audio_log_listener, 3000);
+          setTimeout(audio_log_listener, 3000); // scroll 하단으로
+          converlogPanel.scrollTop = converlogPanel.clientHeight;
+          converlogPanel.scrollTop =
+            converlogPanel.scrollHeight - converlogPanel.scrollTop;
         }
       }
 
-      $(function () {
-        if (typeof webkitSpeechRecognition !== "function") {
-          alert("크롬에서만 동작 합니다.");
+      const FIRST_CHAR = /\S/;
+      const TWO_LINE = /\n\n/g;
+      const ONE_LINE = /\n/g;
+
+      const recognition = new webkitSpeechRecognition();
+      const language = "ko-KR";
+      const $audio = document.querySelector("#audio");
+      // const $btnMic = document.querySelector("#btn-mic");
+      const $resultWrap = document.querySelector("#result");
+      const $iconMusic = document.querySelector("#icon-music");
+
+      let isRecognizing = false;
+      let ignoreEndProcess = false;
+      let finalTranscript = "";
+
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      /**
+       * 음성 인식 시작 처리                ###############
+       */
+      recognition.onstart = function () {
+        console.log("onstart", arguments);
+        isRecognizing = true;
+        // $btnMic.className = "on";
+      };
+
+      /**
+       * 음성 인식 종료 처리
+       */
+      recognition.onend = function () {
+        console.log("onend", arguments);
+        recognition.onstart();
+        if (ignoreEndProcess) {
           return false;
         }
 
-        const FIRST_CHAR = /\S/;
-        const TWO_LINE = /\n\n/g;
-        const ONE_LINE = /\n/g;
-
-        const recognition = new webkitSpeechRecognition();
-        const language = "ko-KR";
-        const $audio = document.querySelector("#audio");
-        // const $btnMic = document.querySelector("#btn-mic");
-        const $resultWrap = document.querySelector("#result");
-        const $iconMusic = document.querySelector("#icon-music");
-
-        let isRecognizing = false;
-        let ignoreEndProcess = false;
-        let finalTranscript = "";
-
-        recognition.continuous = true;
-        recognition.interimResults = true;
-
-        /**
-         * 음성 인식 시작 처리                ###############
-         */
-        recognition.onstart = function () {
-          console.log("onstart", arguments);
-          isRecognizing = true;
-          // $btnMic.className = "on";
-        };
-
-        /**
-         * 음성 인식 종료 처리
-         */
-        recognition.onend = function () {
-          console.log("onend", arguments);
-          recognition.onstart();
-          if (ignoreEndProcess) {
-            return false;
-          }
-
-          // DO end process
-          // $btnMic.className = "off";
-          if (!finalTranscript) {
-            console.log("empty finalTranscript");
-            return false;
-          }
-        };
-
-        /**
-         * 음성 인식 결과 처리
-         */
-        recognition.onresult = function (event) {
-          console.log("onresult", event);
-
-          let interimTranscript = "";
-          // if (typeof event.results === "undefined") {
-          //   recognition.onend = null;
-          //   recognition.stop();
-          //   return;
-          // }
-
-          for (let i = event.resultIndex; i < event.results.length; ++i) {
-            const transcript = event.results[i][0].transcript;
-
-            //말이 입력이 완료되면
-            if (event.results[i].isFinal) {
-              finalTranscript += transcript;
-              // console.log(transcript);
-              // localStorage.setItem("text", finalTranscript);
-              // localStorage.setItem("sub", transcript);
-              var checkmark_id = params.userFullName;
-
-              // 음성데이터 보내는 곳!
-              // appendChatMessage(transcript, checkmark_id);
-              console.log("ID : ", checkmark_id);
-              console.log("보낸 음성데이터는 : ", transcript);
-              captiondiv.innerHTML =
-                "<p>" + checkmark_id + " : " + transcript + "</p>";
-              audio_log += checkmark_id + " : " + transcript + "<br/>";
-
-              connection.send({
-                chatMessage: transcript,
-                checkmark_id: checkmark_id,
-                audio: true,
-              });
-
-              connection.send({
-                typing: false,
-              });
-
-              // final_span.innerHTML = transcript;
-              //장고 형태소 분석
-              // var xhr = new XMLHttpRequest();
-
-              // xhr.open("POST", encodeURI("http://localhost:8000/api/stt/"), true);
-              // xhr.setRequestHeader("Content-Type", "application/json");
-
-              // xhr.onreadystatechange = function () {
-              //   if (xhr.readyState == 4 && xhr.status == 200) {
-              //     console.log(xhr.responseText);
-              //   }
-              // };
-              // //json으로 변경
-              // data = new Object();
-              // data.text = transcript;
-              // // console.log(JSON.stringify(data));
-              // xhr.send(JSON.stringify(data));
-            } else {
-              interimTranscript += transcript;
-            }
-          }
-
-          // finalTranscript = capitalize(finalTranscript);
-          // final_span.innerHTML = linebreak(finalTranscript);
-          // interim_span.innerHTML = linebreak(interimTranscript);
-
-          // console.log("finalTranscript", finalTranscript);
-          // console.log("interimTranscript", interimTranscript);
-        };
-
-        /**
-         * 음성 인식 에러 처리
-         */
-        recognition.onerror = function (event) {
-          console.log("onerror", event);
-
-          if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
-            ignoreEndProcess = true;
-          }
-
-          // $btnMic.className = "off";
-        };
-
-        /**
-         * 음성 인식 트리거
-         */
-        function start() {
-          if (isRecognizing) {
-            recognition.stop();
-            return;
-          }
-          recognition.lang = language;
-          recognition.start();
-          ignoreEndProcess = false;
-
-          finalTranscript = "";
-          final_span.innerHTML = "";
-          interim_span.innerHTML = "";
+        // DO end process
+        // $btnMic.className = "off";
+        if (!finalTranscript) {
+          console.log("empty finalTranscript");
+          return false;
         }
-        /**
-         * 초기 바인딩
-         */
-        function initialize() {
-          // const $btnTTS = document.querySelector("#btn-tts");
-          // const defaultMsg = "전 음성 인식된 글자를 읽습니다.";
+      };
 
-          // $btnTTS.addEventListener("click", () => {
-          //   const text = final_span.innerText || defaultMsg;
-          //   textToSpeech(text);
-          // });
+      /**
+       * 음성 인식 결과 처리
+       */
+      recognition.onresult = function (event) {
+        console.log("onresult", event);
 
-          // $btnMic.addEventListener("click", start);
+        let interimTranscript = "";
+        // if (typeof event.results === "undefined") {
+        //   recognition.onend = null;
+        //   recognition.stop();
+        //   return;
+        // }
 
-          start();
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          const transcript = event.results[i][0].transcript;
+
+          //말이 입력이 완료되면
+          if (event.results[i].isFinal) {
+            finalTranscript += transcript;
+            // console.log(transcript);
+            // localStorage.setItem("text", finalTranscript);
+            // localStorage.setItem("sub", transcript);
+            var checkmark_id = params.userFullName;
+
+            // 음성데이터 보내는 곳!
+            // appendChatMessage(transcript, checkmark_id);
+            console.log("ID : ", checkmark_id);
+            console.log("보낸 음성데이터는 : ", transcript);
+            caption_temp = transcript;
+            captiondiv.innerHTML =
+              "<p>" + checkmark_id + " : " + transcript + "</p>";
+            audio_log += checkmark_id + " : " + transcript + "<br/>";
+
+            connection.send({
+              chatMessage: transcript,
+              checkmark_id: checkmark_id,
+              audio: true,
+            });
+
+            connection.send({
+              typing: false,
+            });
+
+            // final_span.innerHTML = transcript;
+            //장고 형태소 분석
+            // var xhr = new XMLHttpRequest();
+
+            // xhr.open("POST", encodeURI("http://localhost:8000/api/stt/"), true);
+            // xhr.setRequestHeader("Content-Type", "application/json");
+
+            // xhr.onreadystatechange = function () {
+            //   if (xhr.readyState == 4 && xhr.status == 200) {
+            //     console.log(xhr.responseText);
+            //   }
+            // };
+            // //json으로 변경
+            // data = new Object();
+            // data.text = transcript;
+            // // console.log(JSON.stringify(data));
+            // xhr.send(JSON.stringify(data));
+          } else {
+            interimTranscript += transcript;
+          }
         }
 
-        initialize();
-      });
+        // finalTranscript = capitalize(finalTranscript);
+        // final_span.innerHTML = linebreak(finalTranscript);
+        // interim_span.innerHTML = linebreak(interimTranscript);
+
+        // console.log("finalTranscript", finalTranscript);
+        // console.log("interimTranscript", interimTranscript);
+      };
+
+      /**
+       * 음성 인식 에러 처리
+       */
+      recognition.onerror = function (event) {
+        console.log("onerror", event);
+
+        if (event.error.match(/no-speech|audio-capture|not-allowed/)) {
+          ignoreEndProcess = true;
+        }
+
+        // $btnMic.className = "off";
+      };
+
+      /**
+       * 음성 인식 트리거
+       */
+      function start() {
+        if (isRecognizing) {
+          recognition.stop();
+          return;
+        }
+        recognition.lang = language;
+        recognition.start();
+        ignoreEndProcess = false;
+
+        finalTranscript = "";
+        final_span.innerHTML = "";
+        interim_span.innerHTML = "";
+      }
+      /**
+       * 초기 바인딩
+       */
+      function initialize() {
+        // const $btnTTS = document.querySelector("#btn-tts");
+        // const defaultMsg = "전 음성 인식된 글자를 읽습니다.";
+
+        // $btnTTS.addEventListener("click", () => {
+        //   const text = final_span.innerText || defaultMsg;
+        //   textToSpeech(text);
+        // });
+
+        // $btnMic.addEventListener("click", start);
+
+        start();
+      }
+
+      initialize();
 
       (function () {
         var params = {},
@@ -582,7 +650,17 @@
 
       // keep room opened even if owner leaves
       connection.autoCloseEntireSession = true;
+      connection.onmute = function (e) {
+        e.mediaElement.setAttribute(
+          "poster",
+          "//cdn.pixabay.com/photo/2017/11/10/05/04/camera-2935403_960_720.png"
+        );
+      };
 
+      // if local or remote stream is unmuted
+      connection.onunmute = function (e) {
+        e.mediaElement.removeAttribute("poster");
+      };
       // https://www.rtcmulticonnection.org/docs/maxParticipantsAllowed/
       connection.maxParticipantsAllowed = 5;
       // set value 2 for one-to-one connection
@@ -638,7 +716,16 @@
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: true,
       };
-
+      connection.iceServers = [
+        {
+          urls: [
+            "stun:stun.l.google.com:19302",
+            "stun:stun1.l.google.com:19302",
+            "stun:stun2.l.google.com:19302",
+            "stun:stun.l.google.com:19302?transport=udp",
+          ],
+        },
+      ];
       connection.onUserStatusChanged = function (event) {
         var infoBar = document.getElementById("onUserStatusChanged");
         var names = [];
@@ -684,6 +771,7 @@
           // 수화영상 찾는 통신 실행할것...
           console.log("받은 음성데이터는 : ", event.data.chatMessage);
           console.log("보낸사람 : ", event.data.checkmark_id);
+          caption_temp = event.data.chatMessage;
           captiondiv.innerHTML =
             "<p>" +
             event.data.checkmark_id +
@@ -762,7 +850,7 @@
           var video = document.getElementById("main-video");
           video.setAttribute("data-streamid", event.streamid);
           // video.style.display = 'none';
-          if (event.type === "local") {
+          if (event.type === "remote") {
             video.muted = true;
             video.volume = 0;
           }
@@ -1237,50 +1325,113 @@
         $("#screen-viewer").show();
       }
 
+      // 수어영상
+      function onsignvideomenu() {
+        console.log("######### 실행됨@");
+        menuactiveis = $("#onoff-data i").hasClass("active");
+        // alert("!!!");
+        if (!menuactiveis) {
+          $("#onoff-data i").addClass("active");
+        }
+        if (
+          $("#onoff-data i").hasClass("active") ||
+          $("#onoff-data i").hasClass("active")
+        ) {
+          //video_streamer();
+          // ajax
+          hand_jesture_flag = true;
+          hand_jesture_clock();
+
+          //if (data.length) {
+          //  data.push(...newdata);
+          //} else {
+          //  data.push(...newdata);
+          //  video_streamer();
+          // }
+        }
+      }
+      function onsignvideo() {
+        onsignvideomenu();
+
+        chatactiveis = $("#chatboxact").hasClass("active");
+        particiactiveis = $("#particiboxact").hasClass("active");
+        recodeactiveis = $("#recodeboxact").hasClass("active");
+
+        if (!chatactiveis) {
+          $("#chatboxact").addClass("active");
+        }
+        if (particiactiveis) {
+          $("#particiboxact").removeClass("active");
+        }
+        if (!recodeactiveis) {
+          $("#recodeboxact").addClass("active");
+        }
+
+        document.getElementById("parti-btn").checked = true;
+      }
+      function offsignvideomenu() {
+        menuactiveis = $("#onoff-data i").hasClass("active");
+        if (menuactiveis) {
+          $("#onoff-data i").removeClass("active");
+          data = []; // 수어영상
+          newdata = []; // 추가할 수어영상
+          hand_jesture_flag = false;
+          // $("#player").stop();
+          // document.getElementById("player").src = "";
+          console.log("DATA 삭제 : ", data);
+          // alert("바뀌었어요!");
+        }
+      }
+      function offsignvideo() {
+        offsignvideomenu();
+
+        chatactiveis = $("#chatboxact").hasClass("active");
+        particiactiveis = $("#particiboxact").hasClass("active");
+        recodeactiveis = $("#recodeboxact").hasClass("active");
+
+        if (chatactiveis) {
+          $("#chatboxact").removeClass("active");
+        }
+        if (!particiactiveis) {
+          $("#particiboxact").addClass("active");
+        }
+        if (!recodeactiveis) {
+          $("#recodeboxact").addClass("active");
+        }
+
+        document.getElementById("chat-btn").checked = true;
+      }
       //    button func
-      $("#onoff-cam i").click(function () {
-        connection.onmute = function (e) {
-          if (!e.mediaElement) {
-            return;
-          }
+      // 캠 끄기
+      $("#onoff-cam i").click(function (e) {
+        camactiveis = $("#onoff-cam i").hasClass("active");
 
-          if (e.muteType === "both" || e.muteType === "video") {
-            e.mediaElement.src = null;
-            e.mediaElement.pause();
-            e.mediaElement.poster =
-              e.snapshot ||
-              "https://cdn.webrtc-experiment.com/images/muted.png";
-          } else if (e.muteType === "audio") {
-            e.mediaElement.muted = true;
-          }
-        };
-
-        // connection.onunmute = function (e) {
-        //   if (!e.mediaElement) {
-        //     return;
-        //   }
-
-        //   if (e.unmuteType === "both" || e.unmuteType === "video") {
-        //     e.mediaElement.poster = null;
-        //     e.mediaElement.src = URL.createObjectURL(e.stream);
-        //     e.mediaElement.play();
-        //   } else if (e.unmuteType === "audio") {
-        //     e.mediaElement.muted = false;
-        //   }
-        // };
-
-        $(this).toggleClass("active");
-        alert("onoff-cam");
+        var streamByUserId = connection.streamEvents.selectFirst({
+          userid: connection.userid,
+        }).stream;
+        if (camactiveis) {
+          streamByUserId.mute("video");
+          $(this).removeClass("active");
+        } else {
+          streamByUserId.unmute("video");
+          $(this).addClass("active");
+        }
       });
+      // 마이크 끄기
       $("#onoff-mic i").click(function () {
-        // var firstRemoteStream = connection.streamEvents.selectFirst({
-        //   remote: true,
-        // }).stream;
-        // firstRemoteStream.mute();
-        // // var streamByUserId = connection.streamEvents.selectFirst({
-        // //   userid: params.userFullName,
-        // // }).stream;
-        // streamByUserId.mute();
+        micactiveis = $("#onoff-mic i").hasClass("active");
+        var streamByUserId = connection.streamEvents.selectFirst({
+          userid: connection.userid,
+        }).stream;
+        if (micactiveis) {
+          streamByUserId.mute("audio");
+          recognition.stop();
+          $(this).removeClass("active");
+        } else {
+          streamByUserId.unmute("audio");
+          recognition.start();
+          $(this).addClass("active");
+        }
         // $(this).toggleClass("active");
         // alert("onoff-mic");
       });
@@ -1297,10 +1448,14 @@
         }
       });
       $("#onoff-data i").click(function () {
-        $(this).toggleClass("active");
-        $("#parti-label").click();
+        menuactiveis = $("#onoff-data i").hasClass("active");
+        if (!menuactiveis) {
+          onsignvideo();
+        }
+        if (menuactiveis) {
+          offsignvideo();
+        }
 
-        // ###### 여기에 수어영상 찾아오는 코드짤것 ###############################################
         alert("onoff-data");
       });
       $("#onoff-reg i").click(function () {
@@ -1325,6 +1480,7 @@
       // });
       // siedbar menu
       $("#chat-label").click(function () {
+        offsignvideomenu();
         chatactiveis = $("#chatboxact").hasClass("active");
         particiactiveis = $("#particiboxact").hasClass("active");
         recodeactiveis = $("#recodeboxact").hasClass("active");
@@ -1340,6 +1496,7 @@
         }
       });
       $("#parti-label").click(function () {
+        onsignvideomenu();
         chatactiveis = $("#chatboxact").hasClass("active");
         particiactiveis = $("#particiboxact").hasClass("active");
         recodeactiveis = $("#recodeboxact").hasClass("active");
@@ -1355,6 +1512,7 @@
         }
       });
       $("#record-label").click(function () {
+        offsignvideomenu();
         chatactiveis = $("#chatboxact").hasClass("active");
         particiactiveis = $("#particiboxact").hasClass("active");
         recodeactiveis = $("#recodeboxact").hasClass("active");
@@ -1387,6 +1545,7 @@
           connection.send({
             typing: false,
           });
+          caption_temp = handscript;
           captiondiv.innerHTML =
             "<p>" + checkmark_id + " : " + handscript + "</p>";
           audio_log += checkmark_id + " : " + handscript + "<br/>";
@@ -1401,6 +1560,9 @@
     </script>
   </body>
   <style type="text/css">
+    .playermp4 {
+      margin-top: 60px;
+    }
     /* caption */
 
     #containerA div.activecaption {
