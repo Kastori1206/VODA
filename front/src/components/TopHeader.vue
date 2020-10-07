@@ -15,73 +15,50 @@
         <p>{{ memberInfo.username }}님 환영합니다.</p>
       </li>
       <li @click="logout">
-        <router-link to="/voda">Logout</router-link>
+        <router-link to="/">Logout</router-link>
       </li>
     </ul>
     <ul class="header-ul" v-if="!isLoggedIn">
       <li>
-        <router-link to="/voda/login/">Login</router-link>
+        <router-link to="/login/">Login</router-link>
       </li>
       <li>
-        <router-link to="/voda/signup/">Signup</router-link>
+        <router-link to="/signup/">Signup</router-link>
       </li>
       <li>
-        <router-link to="/voda/customer/">Customer</router-link>
+        <!-- <router-link to="/customer/">Customer</router-link> -->
+        <a href="https://j3d206.p.ssafy.io:8001/voda/join/">Customer</a>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "Header",
   props: {
     isLoggedIn: Boolean,
+    memberInfo: {
+      id: String,
+      email: String,
+      username: String,
+    },
   },
   data() {
-    return {
-      memberInfo: {
-        id: "",
-        email: "",
-        username: "",
-      },
-    };
+    return {};
   },
   methods: {
     logout() {
       this.$emit("submit-logout");
     },
-    info() {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${this.$cookies.get("token")}`,
-        },
-      };
-      axios
-        .post(
-          process.env.VUE_APP_DJANGO_API_SERVER_URL + "api/users/info/",
-          null,
-          config
-        )
-        .then((res) => {
-          this.memberInfo = res.data;
-        })
-        .catch(() => {
-          // console.log(err);
-        });
-    },
-  },
-  mounted() {
-    this.info();
   },
 };
 </script>
 
 
 <style scoped>
-a, p {
+a,
+p {
   text-decoration: none;
   font-family: "Viga", sans-serif;
   color: white;
@@ -109,10 +86,10 @@ a, p {
   display: flex;
   padding: 10px 12px;
   justify-content: center;
-  align-items:center;
+  align-items: center;
 }
 .header-ul li a {
   display: flex;
-  align-items:center;
+  align-items: center;
 }
 </style>

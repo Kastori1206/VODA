@@ -34,7 +34,7 @@ import axios from "axios";
 
 export default {
   name: "Signup",
-  title: 'VODA | Signup',
+  title: "VODA | Signup",
   data() {
     return {
       email: null,
@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     signup() {
-      console.log("signup@:", this.signupData);
+      // console.log("signup@:", this.signupData);
       axios
         .post(process.env.VUE_APP_DJANGO_API_SERVER_URL + "api/users/signup/", {
           email: this.email,
@@ -58,7 +58,7 @@ export default {
           if (res.data.message == "ok") {
             alert("등록이 완료되었습니다.");
             //처리하고 다른 경로로 이동
-            this.$router.push("/voda");
+            this.$router.push("/");
           } else {
             alert("이메일을 중복입니다");
           }
@@ -95,7 +95,7 @@ export default {
 
 <style scoped>
 .signup {
-  background: linear-gradient(-30deg, #e8c6ff, #bdabff,#eba9ff , #c061ff);
+  background: linear-gradient(-30deg, #e8c6ff, #bdabff, #eba9ff, #c061ff);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
   width: 100vw;
@@ -113,13 +113,13 @@ export default {
 }
 @keyframes gradient {
   0% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
   50% {
-      background-position: 100% 50%;
+    background-position: 100% 50%;
   }
   100% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 }
 .signup-input {

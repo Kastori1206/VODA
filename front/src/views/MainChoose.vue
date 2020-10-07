@@ -22,56 +22,76 @@
     </div>
     <section class="scroll-content">
       <div class="scroll-graphic">
-        <div class="graphic-item"><img class="scene-img" src="../assets/main1.png" alt=""></div>
-        <div class="graphic-item"><img class="scene-img" src="../assets/main2.png" alt=""></div>
+        <div class="graphic-item">
+          <img class="scene-img" src="../assets/main1.png" alt="" />
+        </div>
+        <div class="graphic-item">
+          <img class="scene-img" src="../assets/main2.png" alt="" />
+        </div>
         <div class="graphic-item" data-action="birdFlies">
           <!-- <img class="bird" src="../assets/images/bird.gif" alt=""> -->
-          <img class="scene-img" src="../assets/main3.png" alt="">
+          <img class="scene-img" src="../assets/main3.png" alt="" />
         </div>
-        <div class="graphic-item"><img class="scene-img" src="../assets/main4.png" alt=""></div>
+        <div class="graphic-item">
+          <img class="scene-img" src="../assets/main4.png" alt="" />
+        </div>
         <!-- <div class="graphic-item" data-action="birdFlies2"> -->
-          <!-- <img class="bird" src="../assets/images/bird.gif" alt=""> -->
-          <!-- <img class="scene-img" src="../assets/images/04.png" alt=""> -->
+        <!-- <img class="bird" src="../assets/images/bird.gif" alt=""> -->
+        <!-- <img class="scene-img" src="../assets/images/04.png" alt=""> -->
         <!-- </div> -->
-          <div class="graphic-item"><img class="scene-img" src="../assets/main5.png" alt=""></div>
-        <div class="graphic-item"><img class="scene-img" src="../assets/main6.png" alt=""></div>
-        <div class="graphic-item"><img class="scene-img" src="../assets/main7.png" alt=""></div>
-        <div class="graphic-item"><img class="scene-img" src="../assets/main8.png" alt=""></div>
+        <div class="graphic-item">
+          <img class="scene-img" src="../assets/main5.png" alt="" />
+        </div>
+        <div class="graphic-item">
+          <img class="scene-img" src="../assets/main6.png" alt="" />
+        </div>
+        <div class="graphic-item">
+          <img class="scene-img" src="../assets/main7.png" alt="" />
+        </div>
+        <div class="graphic-item">
+          <img class="scene-img" src="../assets/main8.png" alt="" />
+        </div>
       </div>
       <div class="scroll-text global-width">
         <div class="step">
           <p>
-            김보다씨를 소개합니다!<br><br>김보다씨는 21살 청각장애인 대학생입니다.<br>대학에서 수업을 들을 때 항상 속기사분과 함께합니다.
+            김보다씨를 소개합니다!<br /><br />김보다씨는 21살 청각장애인
+            대학생입니다.<br />대학에서 수업을 들을 때 항상 속기사분과
+            함께합니다.
+          </p>
+        </div>
+        <div class="step">
+          <p>그러다, 전 세계에 코로나 바이러스가 퍼지게 되었습니다.</p>
+        </div>
+        <div class="step">
+          <p>
+            사회적 거리두기를 위해 모든 대학에서는 <br />화상회의를 통한 비대면
+            수업을 실시하게 됩니다.
           </p>
         </div>
         <div class="step">
           <p>
-            그러다, 전 세계에 코로나 바이러스가 퍼지게 되었습니다.
+            청각장애인인 김보다씨는 작고 흐릿한 화면으로 <br />교수님의
+            입모양으로만 수업 내용을 따라가려니 버겁습니다.
           </p>
         </div>
         <div class="step">
           <p>
-            사회적 거리두기를 위해 모든 대학에서는 <br>화상회의를 통한 비대면 수업을 실시하게 됩니다.
+            게다가 PPT 자료만 띄워 수업하시는 교수님과의 수업은 저절로 한숨이
+            나옵니다.
           </p>
         </div>
         <div class="step">
           <p>
-            청각장애인인 김보다씨는 작고 흐릿한 화면으로 <br>교수님의 입모양으로만 수업 내용을 따라가려니 버겁습니다.
+            그렇게 전 세계 김보다씨를 위해 청각장애인을 위한 화상회의 서비스,<br />
+            VODA프로젝트를 기획하게 됐습니다
           </p>
         </div>
         <div class="step">
           <p>
-            게다가 PPT 자료만 띄워 수업하시는 교수님과의 수업은 저절로 한숨이 나옵니다.
-          </p>
-        </div>
-        <div class="step">
-          <p>
-            그렇게 전 세계 김보다씨를 위해 청각장애인을 위한 화상회의 서비스,<br> VODA프로젝트를 기획하게 됐습니다
-          </p>
-        </div>
-        <div class="step">
-          <p>
-            VODA서비스는 화상회의 서비스 위에 자막과 수화영상을 제공합니다 <br> 게다가 지화 인식까지!!
+            VODA서비스는 화상회의 서비스 위에 자막과 수화영상을 제공합니다
+            <br />
+            게다가 지화 인식까지!!
           </p>
         </div>
         <div class="step">
@@ -95,22 +115,26 @@
       <div class="three-choose" v-if="!isLoggedIn">
         <div class="choose-button">
           <div>
-            <a href="/voda/login"><button>로그인</button></a>
+            <a href="/login"><button>로그인</button></a>
           </div>
           <div>
-            <a href="/voda/signup"><button>회원가입</button></a>
+            <a href="/signup"><button>회원가입</button></a>
           </div>
           <div>
-            <a href="/voda/customer"><button>손님으로 사용</button></a>
+            <a href="/customer"><button>손님으로 사용</button></a>
           </div>
         </div>
       </div>
       <div class="main-box" v-if="isLoggedIn">
         <div class="meeting-button">
-          <a href="/voda/"><button>미팅룸 생성</button></a>
+          <a href="https://j3d206.p.ssafy.io:8001/voda/create/"
+            ><button>미팅룸 생성</button></a
+          >
         </div>
         <div class="meeting-button">
-          <a href="/voda/"><button>미팅룸 참여</button></a>
+          <a href="https://j3d206.p.ssafy.io:8001/voda/join/"
+            ><button>미팅룸 참여</button></a
+          >
         </div>
       </div>
     </div>
@@ -129,48 +153,53 @@
 // @ is an alias to /src
 
 export default {
-  name: 'MainChoose',
-  title: 'VODA | 청각장애인을 위한 화상회의 서비스',
+  name: "MainChoose",
+  title: "VODA | 청각장애인을 위한 화상회의 서비스",
   props: {
-    isLoggedIn:Boolean
+    isLoggedIn: Boolean,
   },
   data() {
     return {
       // isLoggedin: false,
-    }
+    };
   },
   mounted() {
     this.$nextTick(function () {
       // 모든 화면이 렌더링된 후 실행합니다.
       this.isLoggedIn = this.$cookies.isKey("token");
-      console.log('Login?', this.isLoggedIn)
-    })
-    
+      // console.log("Login?", this.isLoggedIn);
+    });
 
     const actions = {
-        //true나 false가 들어옴
-        birdFlies(key) {
-            if (key) {
-                document.querySelector('[data-index="2"] .bird').style.transform = 
-                `translateX(${window.innerWidth}px)`;
-            } else {
-                document.querySelector('[data-index="2"] .bird').style.transform = 
-                `translateX(-100%)`;
-            }
-        },
-        birdFlies2(key) {
-            if (key) {
-                document.querySelector('[data-index="5"] .bird').style.transform = 
-                `translate(${window.innerWidth}px, ${-window.innerHeight * 0.7}px)`;
-            } else {
-                document.querySelector('[data-index="5"] .bird').style.transform = 
-                `translate(-100%)`;
-            }
+      //true나 false가 들어옴
+      birdFlies(key) {
+        if (key) {
+          document.querySelector(
+            '[data-index="2"] .bird'
+          ).style.transform = `translateX(${window.innerWidth}px)`;
+        } else {
+          document.querySelector(
+            '[data-index="2"] .bird'
+          ).style.transform = `translateX(-100%)`;
         }
-    }
+      },
+      birdFlies2(key) {
+        if (key) {
+          document.querySelector(
+            '[data-index="5"] .bird'
+          ).style.transform = `translate(${window.innerWidth}px, ${
+            -window.innerHeight * 0.7
+          }px)`;
+        } else {
+          document.querySelector(
+            '[data-index="5"] .bird'
+          ).style.transform = `translate(-100%)`;
+        }
+      },
+    };
 
-    const stepElems = document.querySelectorAll('.step')
-    const graphicElems = document.querySelectorAll('.graphic-item')
+    const stepElems = document.querySelectorAll(".step");
+    const graphicElems = document.querySelectorAll(".graphic-item");
     //현재 활성화된(visible 클래스가 붙은) .graphic-item을 지정
     let currentItem = graphicElems[0];
     let ioIndex;
@@ -178,83 +207,78 @@ export default {
     // IntersectionObserver
     //눈에 보이는지 사라지는지 확인 가능
     const io = new IntersectionObserver((entries) => {
-        //문자열을 숫자열로 *1해서 바꿔주기
-        ioIndex = entries[0].target.dataset.index * 1;        
-        console.log(ioIndex)
-
+      //문자열을 숫자열로 *1해서 바꿔주기
+      ioIndex = entries[0].target.dataset.index * 1;
+      console.log(ioIndex);
     });
 
     for (let i = 0; i < stepElems.length; i++) {
-        //observer가 관찰하도록 
-        //사라지거나 나타날 때 시점 관찰 
-        io.observe(stepElems[i]);
-        // stepElems[i].setAttribute('data-index', i);
-        stepElems[i].dataset.index = i;
-        graphicElems[i].dataset.index = i;
-
+      //observer가 관찰하도록
+      //사라지거나 나타날 때 시점 관찰
+      io.observe(stepElems[i]);
+      // stepElems[i].setAttribute('data-index', i);
+      stepElems[i].dataset.index = i;
+      graphicElems[i].dataset.index = i;
     }
 
     function activate(action) {
-        currentItem.classList.add('visible');
-        if (action) {
-            actions[action](true);
-        }
+      currentItem.classList.add("visible");
+      if (action) {
+        actions[action](true);
+      }
     }
 
     function inactivate(action) {
-        currentItem.classList.remove('visible')
-        if (action) {
-            actions[action](false);
-        }
+      currentItem.classList.remove("visible");
+      if (action) {
+        actions[action](false);
+      }
     }
 
-    window.addEventListener('scroll', () => {
-        let step;
-        let boundingRect;
-        // let temp = 0;
+    window.addEventListener("scroll", () => {
+      let step;
+      let boundingRect;
+      // let temp = 0;
 
-        // for (let i = 0; i < stepElems.length; i++) {
-        //그 전거 그 다음거
-        //맨 처음에 ioIndex = 0이기 때문에 step이 값이 있을 때만 실행하도록
-        for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
-        
-            step = stepElems[i];
-            // DomRect 위치와 너비
-            if (!step) continue;
-            boundingRect = step.getBoundingClientRect();
+      // for (let i = 0; i < stepElems.length; i++) {
+      //그 전거 그 다음거
+      //맨 처음에 ioIndex = 0이기 때문에 step이 값이 있을 때만 실행하도록
+      for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
+        step = stepElems[i];
+        // DomRect 위치와 너비
+        if (!step) continue;
+        boundingRect = step.getBoundingClientRect();
 
-            // console.log(boundingRect.top); 
-            
-            if (boundingRect.top > window.innerHeight * 0.1 &&
-                boundingRect.top < window.innerHeight * 0.8) {
-                // 몇번째 인덱스에 몇번째 스텝이 있는지 확인
-                // console.log(step.dataset.index);
-                
-                inactivate();
-                currentItem = graphicElems[step.dataset.index]
-                //data-action의 이름을 가져올 수 있음
-                activate(currentItem.dataset.action);
-                   
-            } 
+        // console.log(boundingRect.top);
 
+        if (
+          boundingRect.top > window.innerHeight * 0.1 &&
+          boundingRect.top < window.innerHeight * 0.8
+        ) {
+          // 몇번째 인덱스에 몇번째 스텝이 있는지 확인
+          // console.log(step.dataset.index);
+
+          inactivate();
+          currentItem = graphicElems[step.dataset.index];
+          //data-action의 이름을 가져올 수 있음
+          activate(currentItem.dataset.action);
         }
-        // console.log(temp);
+      }
+      // console.log(temp);
     });
     //새로고침 했을 때 위로 올리는 작업
-    window.addEventListener('load', () => {
-        // (x, y), ms시간
-        setTimeout(() => scrollTo(0, 0), 100);
-            
-    })
+    window.addEventListener("load", () => {
+      // (x, y), ms시간
+      setTimeout(() => scrollTo(0, 0), 100);
+    });
     // 첫번째 인덱스 자동으로 실행됨
     activate();
-    
   },
   updated() {
     this.isLoggedIn = this.$cookies.isKey("token");
-    console.log('updated Login?', this.isLoggedIn)
+    // console.log("updated Login?", this.isLoggedIn);
   },
-}
+};
 </script>
 
 <style scoped>
@@ -262,7 +286,7 @@ a {
   text-decoration: none;
   color: rgb(73, 12, 73);
   font-weight: 800;
-  font-family: 'Jua', sans-serif;
+  font-family: "Jua", sans-serif;
 }
 
 h1 {
@@ -270,46 +294,46 @@ h1 {
 }
 
 h1 span {
-  font-family: 'Jua', sans-serif;
+  font-family: "Jua", sans-serif;
   position: relative;
   top: 20px;
   display: inline-block;
-  animation: bounce .3s ease 4 alternate;
+  animation: bounce 0.3s ease 4 alternate;
   font-size: 80px;
-  color: #FFF;
-  text-shadow: 0 1px 0 #CCC,
-               0 2px 0 #CCC,
-               0 3px 0 #CCC,
-               0 4px 0 #CCC,
-               0 5px 0 #CCC,
-               0 6px 0 transparent,
-               0 7px 0 transparent,
-               0 8px 0 transparent,
-               0 9px 0 transparent,
-               0 10px 10px rgba(0, 0, 0, .4);
+  color: #fff;
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
+    0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
+    0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
 }
 
-h1 span:nth-child(2) { animation-delay: .1s; }
-h1 span:nth-child(3) { animation-delay: .2s; }
-h1 span:nth-child(4) { animation-delay: .3s; }
-h1 span:nth-child(5) { animation-delay: .4s; }
-h1 span:nth-child(6) { animation-delay: .5s; }
-h1 span:nth-child(7) { animation-delay: .6s; }
-h1 span:nth-child(8) { animation-delay: .7s; }
+h1 span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+h1 span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+h1 span:nth-child(4) {
+  animation-delay: 0.3s;
+}
+h1 span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+h1 span:nth-child(6) {
+  animation-delay: 0.5s;
+}
+h1 span:nth-child(7) {
+  animation-delay: 0.6s;
+}
+h1 span:nth-child(8) {
+  animation-delay: 0.7s;
+}
 
 @keyframes bounce {
   100% {
     top: -20px;
-    text-shadow: 0 1px 0 #CCC,
-                 0 2px 0 #CCC,
-                 0 3px 0 #CCC,
-                 0 4px 0 #CCC,
-                 0 5px 0 #CCC,
-                 0 6px 0 #CCC,
-                 0 7px 0 #CCC,
-                 0 8px 0 #CCC,
-                 0 9px 0 #CCC,
-                 0 50px 25px rgba(0, 0, 0, .2);
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
+      0 5px 0 #ccc, 0 6px 0 #ccc, 0 7px 0 #ccc, 0 8px 0 #ccc, 0 9px 0 #ccc,
+      0 50px 25px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -318,7 +342,7 @@ h1 span:nth-child(8) { animation-delay: .7s; }
   font-weight: 700;
   font-size: 400%;
   color: white;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .mainchoose {
@@ -327,17 +351,22 @@ h1 span:nth-child(8) { animation-delay: .7s; }
   width: 100vw;
   height: 100vh;
 }
-div, section, header, p, h1, h2 {
-	box-sizing: border-box;
+div,
+section,
+header,
+p,
+h1,
+h2 {
+  box-sizing: border-box;
 }
 img {
-	max-width: 100vw;
+  max-width: 100vw;
   height: auto;
 }
 .global-width {
-	max-width: 620px;
-	margin: 0 auto;
-	padding: 0 15px;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 .scroll-content {
   /* background-image: linear-gradient(to right bottom, #d4a3ff, #d098ff, #cc8cff, #c980ff, #c574ff, #ca74ff, #ce75fe, #d375fe, #df83fe, #ea92fe, #f3a1fe, #fbb0ff); */
@@ -345,117 +374,115 @@ img {
   /* overflow-x: hidden; */
 }
 .scroll-graphic {
-	/* 사진이 닿았을 때 고정됨 */
-	position: sticky;
-	top: 0;
-	overflow: hidden;
-	/* sticky는 heigh가 없어서 height값 정해줌 */
-	height: 100vh;
+  /* 사진이 닿았을 때 고정됨 */
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  /* sticky는 heigh가 없어서 height값 정해줌 */
+  height: 100vh;
 }
 .graphic-item {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	left:0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	opacity: 0;
-	transition: 0.5s;
-	/* 바뀔거 미리 알려줌 */
-	/* 좀 더 효율적으로 바꿔줌 */
-	will-change: opacity;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 0.5s;
+  /* 바뀔거 미리 알려줌 */
+  /* 좀 더 효율적으로 바꿔줌 */
+  will-change: opacity;
 }
 .visible {
-	opacity: 1;
+  opacity: 1;
 }
 .scene-img {
-	max-height: 100vh;
+  max-height: 100vh;
 }
 
 .scroll-text {
-	/* 기본값은 static인데 relative를 사용 */
-	/* z-index를 따로 줘야함 */
-	/* scroll-graphic이 scroll-text보다 뒤에 있기 때문에 앞에 보임 */
-	position: relative;
-	
+  /* 기본값은 static인데 relative를 사용 */
+  /* z-index를 따로 줘야함 */
+  /* scroll-graphic이 scroll-text보다 뒤에 있기 때문에 앞에 보임 */
+  position: relative;
 }
 .step {
-	margin-bottom: 60vh;
-	border-radius: 10px;	
-	padding: 0.5rem 1rem;
-	background: rgba(255,255,255,0.8);
-	box-shadow: rgba(0,0,0,0.3) 0 0 3px;
+  margin-bottom: 60vh;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0 3px;
   text-align: center;
-
 }
 .step p {
   font-weight: 800;
-  font-family: 'Jua', sans-serif;
+  font-family: "Jua", sans-serif;
 }
 
 .bird {
-	position: absolute;
-	left: 0;
-	bottom: 70%;
-	width: 100px;
-	/* 재생시간 delay 속도일정 */
-	transform: translateX(-100%);
-	transition: 1.5s 0.5s linear;
+  position: absolute;
+  left: 0;
+  bottom: 70%;
+  width: 100px;
+  /* 재생시간 delay 속도일정 */
+  transform: translateX(-100%);
+  transition: 1.5s 0.5s linear;
 }
 [data-index="5"] .bird {
-	left: 30%;
-	bottom: 30%;
-	
+  left: 30%;
+  bottom: 30%;
 }
 
 .global-width {
-	padding: 2rem 0;
-	text-align: center;
+  padding: 2rem 0;
+  text-align: center;
 }
 
 .strikethrough {
-	text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .btn-boxing {
   background: #d4a3ff;
-  
+
   /* width: 100vh;
   height: auto; */
 
   position: sticky;
-	top: 0;
-	overflow: hidden;
-	/* sticky는 heigh가 없어서 height값 정해줌 */
-	height: 100vh;
+  top: 0;
+  overflow: hidden;
+  /* sticky는 heigh가 없어서 height값 정해줌 */
+  height: 100vh;
 }
 
 .three-choose {
   background: #d4a3ff;
   margin: 0 auto;
   width: 300px;
-  position:absolute;
-  top:47%; left:50%;
+  position: absolute;
+  top: 47%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 button {
   width: 100%;
-  margin-bottom: 20px;  
+  margin-bottom: 20px;
   padding: 10px;
   border-radius: 5px;
   /* height: 40px; */
   transition: all ease 0.5s;
   border: 1px solid rgba(255, 255, 255, 0.932);
   background-color: rgba(255, 254, 255, 0.082);
-  font-family: 'Viga', sans-serif;
+  font-family: "Viga", sans-serif;
   color: white;
   font-size: 20px;
 }
 button:hover {
   cursor: pointer;
-  transform: scale( 1.1 );
+  transform: scale(1.1);
 
   background-color: #b86ffc49;
 }
@@ -532,6 +559,4 @@ button:focus {
   justify-content: center;
   align-items: center;
 }
-
-
 </style>

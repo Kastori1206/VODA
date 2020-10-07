@@ -1,5 +1,7 @@
 // http://127.0.0.1:9001
 // http://localhost:9001
+// var favicon = require("serve-favicon");
+// this.use(favicon(path.join(__dirname, "public/images", "favicon.ico")));
 
 const fs = require("fs");
 const path = require("path");

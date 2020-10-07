@@ -24,7 +24,7 @@
 
 export default {
   name: "Login",
-  title: 'VODA | Login',
+  title: "VODA | Login",
   data() {
     return {
       loginData: {
@@ -50,7 +50,7 @@ export default {
 
       if (!err) alert(msg);
       else {
-        console.log(this.loginData);
+        // console.log(this.loginData);
         this.$emit("submit-login-data", this.loginData);
       }
     },
@@ -69,7 +69,7 @@ export default {
 
 <style scoped>
 .login {
-  background: linear-gradient(-45deg, #a4ccff, #cec4ff,#f6daff , #adc9ff);
+  background: linear-gradient(-45deg, #a4ccff, #cec4ff, #f6daff, #adc9ff);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
   width: 100vw;
@@ -87,13 +87,13 @@ export default {
 }
 @keyframes gradient {
   0% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
   50% {
-      background-position: 100% 50%;
+    background-position: 100% 50%;
   }
   100% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 }
 
