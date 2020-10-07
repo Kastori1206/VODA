@@ -10,23 +10,30 @@
 
 - [VODA(보다 : 보다 더, 넓은 세상을 보다)](#voda보다--보다-더-넓은-세상을-보다)
   - [목차](#목차)
-  - [개요](#개요)
-  - [기능](#기능)
+  - [:paperclip: 개요](#paperclip-개요)
+    - [향후 전망](#향후-전망)
+  - [:clipboard: 기능](#clipboard-기능)
     - [ERD](#erd)
     - [와이어 프레임](#와이어-프레임)
-  - [기술 스택](#기술-스택)
-  - [기술 설명](#기술-설명)
+  - [:gear: 기술 스택](#gear-기술-스택)
+  - [:hammer_and_pick: 기술 설명](#hammer_and_pick-기술-설명)
     - [디렉토리 구조도](#디렉토리-구조도)
     - [시퀀스 다이어그램](#시퀀스-다이어그램)
+    - [실행방법](#실행방법)
   - [기타](#기타)
-  - [향후 전망](#향후-전망)
+    - [참고](#참고)
+    - [Samsung Software Academy for Youth 2th Gumi, 특화프로젝트 D206](#samsung-software-academy-for-youth-2th-gumi-특화프로젝트-d206)
   - [테스트 방법](#테스트-방법)
 
-## 개요
+## :paperclip: 개요
 
 > 일반 화상미팅 서비스를 청각 장애가 있는 사용자는 사용하기가 힘듭니다. 실시간 자막 서비스와 수어서비스를 제공함으로써, 장애가 있는 사람도 사용 할 수 있는 서비스를 제공합니다.
 
-## 기능
+### 향후 전망
+
+> 부득이한 사정으로 프로젝트에 구현하지는 못했지만 보완할 점이나 추가할 점이 있다면 적어주세요
+
+## :clipboard: 기능
 
 ### ERD
 
@@ -37,7 +44,7 @@
 [와이어프레임 링크](산출물/와이어프레임.pdf)
 ![와이어프레임](산출물/와이어프레임1.png)
 
-## 기술 스택
+## :gear: 기술 스택
 
 | 개발 언어 | 개발 환경 |     API & 라이브러리     |
 | :-------: | :-------: | :----------------------: |
@@ -48,7 +55,7 @@
 |           |           |      KSS(문장 분리)      |
 |           |           |       TF handpose        |
 
-## 기술 설명
+## :hammer_and_pick: 기술 설명
 
 ### 디렉토리 구조도
 
@@ -87,18 +94,85 @@ VODA
 ![시퀀스다이어그램3](doc/시퀀스다이어그램/3.png)
 ![시퀀스다이어그램4](doc/시퀀스다이어그램/4.png)
 
+### 실행방법
+
+1.  Clone the repo
+
+```sh
+git clone https://lab.ssafy.com/s03-ai-sub3/s03p23d206
+cd s03p23d206
+```
+
+2. FRONT
+
+```sh
+  cd /front
+  npm i
+  npm run serve
+```
+
+3. BACKEND
+
+```sh
+##가상환경 만들기
+python -m venv venv
+
+##가상환경 실행
+##window
+source venv/Scripts/activate
+##ubuntu
+source venv/bin/activate
+
+##pip upgrade
+python -m pip install --upgrade pip
+
+## requirements 설치
+pip install -r requirements.txt
+pip install kss
+pip install konlpy
+pip install tensorflow
+pip install opencv-python
+pip install pillow
+
+cd backend
+
+python manage.py runserver
+```
+
+4. VODARTC
+
+```sh
+cd /VODARTC
+
+npm i
+yarn
+
+cd hand
+yarn build
+
+cd ..
+node server.js
+```
+
 ## 기타
 
-> 이외에도 프로젝트를 이해하기 위해 필요한 것들을 적어주세요 (팀별 개발표준, API Documentation 등등...)
+### 참고
 
-## 향후 전망
+- [KoNLPy(형태소분석)/stt(문장분리) 환경설정](https://www.notion.so/KoNLPy-stt-dbf82c14c3114082a378366f131dfc3f)
+- [젠킨스설치](https://www.notion.so/Jenskins-44b1c015e3894ac6b40bffef554c9bef)
 
-> 부득이한 사정으로 프로젝트에 구현하지는 못했지만 보완할 점이나 추가할 점이 있다면 적어주세요
+### [Samsung Software Academy for Youth](https://www.ssafy.com/) 2th Gumi, 특화프로젝트 D206
+
+- `김영민` - kastori1990@gmail.com<br>
+- `이예림` - yearim.lee15b@gmail.com<br>
+- `임효진` - hyojinlim38@gmail.com<br>
+- `윤신혜` - shyoon622@gmail.com<br>
+- `지민우` - mm950406@naver.com<br>
 
 ## 테스트 방법
 
-> 프로젝트를 배포한 url과 테스트하기 위한 계정 ID/PW를 적어주세요
-
 ```
-
+https://j3d206.p.ssafy.io/
+email : test@test.com
+password : test
 ```
