@@ -32,7 +32,7 @@
 > 일반 화상미팅 서비스를 청각 장애가 있는 사용자는 사용하기가 힘듭니다. 실시간 자막 서비스와 수어서비스를 제공함으로써, 장애가 있는 사람도 사용 할 수 있는 서비스를 제공합니다.
 
 ### 시연 영상
-[![데모영상](./document/img/thumbnail.PNG)](https://youtu.be/vydj7ObB76g)
+[![데모영상](./doc/img/thumbnail.PNG)](https://youtu.be/vydj7ObB76g)
 
 ### 향후 전망
 
